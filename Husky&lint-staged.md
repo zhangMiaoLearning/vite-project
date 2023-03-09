@@ -22,15 +22,13 @@ husky-init是用husky快速初始化项目的一次性命令。
 在代码提交之前，进行代码规则检查能够确保进入git库的代码都是符合代码规则的。但是整个项目上运行lint速度会很慢，lint-staged能够让lint只检测暂存区的文件，所以速度很快。  
 ``yarn add i husky lint-staged -D
 ``  
-``在这里插入代码片{
-"husky": {
-"hooks": {
-"pre-commit": "lint-staged"
-}
+``"scripts": {
+"precommit": "lint-staged"
+"lint":"eslint src/"
 },
 "lint-staged": {
-"*.js": "eslint --fix"
-}
-}
+"*.{tsx,js,ts,jsx}": "eslint --cache --fix",
+"*.{tsx,js,ts,jsx,html,json}": "prettier --write"
+]
 ``  
 原理： git commit时触发pre-commit钩子，运行lint-staged命令，对*.js执行eslint命令。eslint要提前配置好。
