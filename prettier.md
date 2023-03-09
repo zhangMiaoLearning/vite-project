@@ -21,7 +21,9 @@
     es5
     尾随逗号在ES5中有效(对象、数组等)。在TypeScript中，类型参数中没有后面的逗号。  
     none 后面没有逗号。  
-    all 对象或数组末尾加逗号
+    all 对象或数组末尾加逗号  
+##
+    官网：https://www.prettier.cn/
 
 
 
