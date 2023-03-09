@@ -12,10 +12,12 @@
 		"lint": "eslint src/"
 	},
 	"dependencies": {
+		"@types/mockjs": "^1.0.7",
 		"eslint-plugin-import": "^2.27.5",
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-promise": "^6.1.1",
 		"lint-staged": "^13.1.2",
+		"mockjs": "^1.1.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-router-dom": "^6.8.2"
