@@ -6,7 +6,7 @@ TypeScript 的工具体系基本分为：Babel系 和 非Babel系。测试工具
 ``yarn add --dev jest``  
 2. 生成配置文件  
 ``npx jest --init``
-3. 按照引导进行选择后，会创建配置文件 jest.config.js，并在 package.json 中添加命令脚本 test: jest
+3. 按照引导进行选择后，会创建配置文件 jest.config.json，并在 package.json 中添加命令脚本 test: jest
 4. 支持 babel 要想支持 ts 和 react，都需要先支持 babel，从而在测试环境中转换代码  
 5. ``yarn add --dev babel-jest @babel/core @babel/preset-env``
 6. 在项目的根目录下创建 babel.config.js ，通过配置 Babel 使其能够兼容当前的 Node 版本。
@@ -39,6 +39,17 @@ TypeScript 的工具体系基本分为：Babel系 和 非Babel系。测试工具
 2. 或者您可以选择安装@types/jest软件包。它为 Jest 全局变量提供类型而无需导入它们。
 - ``yarn add --dev @types/jest``
 
+## 错误
+- 将jest.config.ts改成了jest.config.js  
+``// jest.config.js
+module.exports = {
+preset: "ts-jest",
+testEnvironment: "node",
+};``  
+遇到了ReferenceError: module is not defined in ES module scope错误   
+
+- 修改  
+将它改成json文件。
 
 
 
