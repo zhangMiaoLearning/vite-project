@@ -1,34 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.module.scss'
+import React from 'react';
+import './App.module.scss';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { Suspense } from 'react';
+import LazyModule from './pages/Components/LazyModule';
+import ROUTES from './Router/routes';
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+	return (
+		<BrowserRouter>
+			<Suspense fallback={<LazyModule />}>
+				<Routes>
+					{ROUTES.map((route) => (
+						<Route
+							key={route.key}
+							path={route.path}
+							element={<route.element />}
+						/>
+					))}
+					<Route path="/*" element={<Navigate to="/login" replace />} />
+				</Routes>
+			</Suspense>
+		</BrowserRouter>
+	);
 }
 
-export default App
+export default App;

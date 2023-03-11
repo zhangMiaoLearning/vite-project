@@ -45,4 +45,5 @@
 }
 }``
 
+``yarn eslint-config-prettier``
 
