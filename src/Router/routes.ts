@@ -6,5 +6,12 @@ const ROUTES = [
 		path: '/login',
 		element: lazy(() => import('../pages/Login/Login')),
 	},
+	{
+		key: 'mouse',
+		path: '/mouse',
+		element: lazy(
+			() => import('../pages/Components/MouseTracker/RenderPropModule')
+		),
+	},
 ];
 export default ROUTES;
