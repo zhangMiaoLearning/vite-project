@@ -18,5 +18,10 @@ const ROUTES = [
 		path: '/register',
 		element: lazy(() => import('../pages/Register/Register')),
 	},
+	{
+		key: 'home',
+		path: '/home',
+		element: lazy(() => import('../pages/Home/Home')),
+	},
 ];
 export default ROUTES;

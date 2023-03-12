@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Form, Input, message, Modal } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { LoginApi } from '../../Api/LoginApi';
 import { useNavigate } from 'react-router-dom';
+import { GlobalContext } from '../../Utils/Store/GlobalProvider';
 
 const Login = () => {
+	const { setCurrentUserInfo } = useContext(GlobalContext);
 	const navigate = useNavigate();
 	async function onFinish(values: { username: string; password: string }) {
 		const result = await LoginApi(values).then();
 		if (result.length > 0) {
-			navigate('/mouse');
+			navigate('/home');
+			setCurrentUserInfo({ id: result[0].id, username: result[0].username });
 		} else {
 			message.error('用户名或密码错误');
 		}

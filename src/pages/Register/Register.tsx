@@ -12,7 +12,7 @@ const Register = () => {
 	async function onFinish(values: { userName: string; password: string }) {
 		const result = await RegisterApi(values).then();
 		if (result) {
-			navigate('/mouse');
+			navigate('/home');
 		}
 	}
 
