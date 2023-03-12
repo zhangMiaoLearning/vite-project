@@ -13,5 +13,10 @@ const ROUTES = [
 			() => import('../pages/Components/MouseTracker/RenderPropModule')
 		),
 	},
+	{
+		key: 'register',
+		path: '/register',
+		element: lazy(() => import('../pages/Register/Register')),
+	},
 ];
 export default ROUTES;
