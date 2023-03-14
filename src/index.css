@@ -51,5 +51,10 @@ h1 {
   .ant-btn-primary:not(:disabled):hover {
     background: #8076a6;
   }
-
+  .ant-input-affix-wrapper-focused {
+    border-color: #8076a6;
+  }
+  .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+    border-color: #8076a6;
+  }
 }
