@@ -1,4 +1,5 @@
 import { request } from '../Utils/Axios/Axios';
+import { message } from 'antd';
 
 export function LoginApi(values: { username: string; password: string }) {
 	return request
@@ -7,5 +8,8 @@ export function LoginApi(values: { username: string; password: string }) {
 				'Content-Type': 'application/json',
 			},
 		})
-		.then((res) => res.data);
+		.then((res) => res.data[0])
+		.catch(() => {
+			message.error('用户名或密码错误');
+		});
 }

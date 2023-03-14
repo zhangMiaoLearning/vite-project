@@ -10,9 +10,9 @@ const Login = () => {
 	const navigate = useNavigate();
 	async function onFinish(values: { username: string; password: string }) {
 		const result = await LoginApi(values).then();
-		if (result.length > 0) {
+		if (result) {
 			navigate('/home');
-			setCurrentUserInfo({ id: result[0].id, username: result[0].username });
+			setCurrentUserInfo({ id: result.id, username: result.username });
 		} else {
 			message.error('用户名或密码错误');
 		}
