@@ -1,0 +1,19 @@
+.login-form-page {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .login-form-title {
+    font-weight: bold;
+    font-size: 30px;
+    color: #533657;
+  }
+  .login-form {
+    display: flex;
+    flex-direction: column;
+
+    .register-line {
+      margin-top: 20px;
+    }
+  }
+}

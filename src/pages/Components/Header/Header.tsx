@@ -10,12 +10,13 @@ const Header: React.FC = () => {
 	const location = useLocation();
 	const [currentPath, setCurrentPath] = useState('/');
 	const isLoginPage = currentPath === '/login';
+	const isRegisterPage = currentPath === '/register';
 
 	useEffect(() => {
 		setCurrentPath(location.pathname);
 	}, [location]);
 	const headerContent = () => {
-		if (!isLoginPage) {
+		if (!(isLoginPage || isRegisterPage)) {
 			return (
 				<>
 					<Breadcrumb className="header-menu" items={items} />

@@ -1,0 +1,43 @@
+.register-form-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5vh;
+
+  .register-form-welcome-title {
+    margin: 0;
+    align-items: center;
+    font-weight: bold;
+    font-size: 22px;
+    color: #533657;
+  }
+
+  .register-form-input-title {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    color: #533657;
+    margin-bottom: 8px;
+  }
+
+  .register-form-input {
+    font-size: 14px;
+    color: #909296;
+    border: 1px solid #eaeaec;
+    margin: 0;
+  }
+
+}
+
+.login-line {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+
+  .login-link {
+    text-align: center;
+    text-decoration: underline;
+  }
+}

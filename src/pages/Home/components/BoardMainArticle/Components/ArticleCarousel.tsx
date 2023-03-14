@@ -1,7 +1,6 @@
 import React from 'react';
 import { Carousel } from 'antd';
-
-const BoardMainTop: React.FC = () => {
+const ArticleCarousel = () => {
 	const contentStyle: React.CSSProperties = {
 		height: '160px',
 		color: '#fff',
@@ -28,4 +27,4 @@ const BoardMainTop: React.FC = () => {
 		</div>
 	);
 };
-export default BoardMainTop;
+export default ArticleCarousel;

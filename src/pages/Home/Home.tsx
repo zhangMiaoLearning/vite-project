@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import BoardSideLeft from './components/BoardSideLeft/boardSideLeft';
 import './Home.scss';
-import BoardMainTop from './components/BoardMainTop/BoardMainTop';
+import BoardMainArticle from './components/BoardMainArticle/BoardMainArticle';
 import BoardSideRight from './components/BoardSideRight/BoardSideRight';
+import BoardCard from './components/BoardCard/BoardCard';
 
 const Home = () => {
 	const [selectKey, setSelectKey] = useState('');
 	const getMainContent = () => {
 		if (selectKey === '1') {
-			return <BoardMainTop />;
+			return (
+				<div>
+					<BoardMainArticle />
+					<BoardCard />
+				</div>
+			);
 		}
 		return null;
 	};
@@ -16,7 +22,7 @@ const Home = () => {
 	return (
 		<div className="main-content">
 			<BoardSideLeft setSelectKey={setSelectKey} />
-			{getMainContent()}
+			<section className="main-content-center">{getMainContent()}</section>
 			<BoardSideRight />
 		</div>
 	);

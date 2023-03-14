@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Form, Input, Modal } from 'antd';
+import { Button, Form, Input, message, Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { RegisterApi } from '../../Api/RegisterApi';
+import { ValidUsername } from '../../Api/ValidUsername';
+import './Register.scss';
 
 const Register = () => {
 	const [username, setUsername] = useState('');
@@ -10,9 +12,15 @@ const Register = () => {
 	const navigate = useNavigate();
 
 	async function onFinish(values: { userName: string; password: string }) {
-		const result = await RegisterApi(values).then();
-		if (result) {
-			navigate('/home');
+		const valid = await ValidUsername(values.userName).then();
+		if (valid) {
+			message.error('用户名已存在');
+			return;
+		} else {
+			const result = await RegisterApi(values).then();
+			if (result) {
+				navigate('/home');
+			}
 		}
 	}
 
@@ -25,6 +33,7 @@ const Register = () => {
 
 	return (
 		<div className="register-form-component">
+			<p className="register-form-welcome-title">注册</p>
 			<Form
 				name="basic"
 				initialValues={{ remember: true }}
@@ -33,7 +42,6 @@ const Register = () => {
 				autoComplete="off"
 				validateTrigger={['onChange', 'onBlur']}
 			>
-				<p className="register-form-welcome-title">注册</p>
 				<p className="register-form-input-title">用户名</p>
 				<Form.Item
 					name="userName"
@@ -124,13 +132,13 @@ const Register = () => {
 						注册
 					</Button>
 				</Form.Item>
-				<span className="login-line">
-					已有账号
-					<a href="/LoginPage" className="login-link">
-						登录账号
-					</a>
-				</span>
 			</Form>
+			<span className="login-line">
+				已有账号
+				<a href="/login" className="login-link">
+					登录账号
+				</a>
+			</span>
 		</div>
 	);
 };
