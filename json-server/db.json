@@ -18,20 +18,6 @@
 	],
 	"card": [
 		{
-			"title": "title1",
-			"description": "description",
-			"rate": 4,
-			"updateAt": "2023-03-19 17:15:08",
-			"id": 1
-		},
-		{
-			"title": "7",
-			"description": "17",
-			"rate": 4,
-			"updateAt": "2023-03-19 17:53:38",
-			"id": 2
-		},
-		{
 			"title": "2",
 			"description": "2",
 			"rate": 1,
@@ -58,13 +44,6 @@
 			"rate": 5,
 			"updateAt": "2023-03-19 17:52:49",
 			"id": 6
-		},
-		{
-			"title": "13",
-			"description": "13",
-			"rate": 4,
-			"updateAt": "2023-03-19 17:55:46",
-			"id": 7
 		}
 	]
 }

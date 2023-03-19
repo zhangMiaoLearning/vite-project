@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Button, Card, Form, Input, Rate } from 'antd';
+import { Button, Card, Form, Input, Modal, Rate } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import TextArea from 'antd/es/input/TextArea';
 import styles from './BoardCard.module.scss';
 import { UpdateCardInformation } from '../../../../../../Api/UpdateCardInformation';
 import { timeTransformation } from '../../../../../../Utils/getTime';
+import { DeleteCard } from '../../../../../../Api/DeleteCard';
 
 interface BoardCardProps {
 	id: string;
@@ -18,6 +19,7 @@ interface BoardCardProps {
 const BoardCard: React.FC<BoardCardProps> = (props) => {
 	const [isEdit, setIsEdit] = useState(false);
 	const [editId, setEditId] = useState('');
+	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 	const date = timeTransformation(new Date());
 	const [form] = Form.useForm();
 
@@ -28,6 +30,11 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 	}) {
 		UpdateCardInformation(props.id, values, date).then();
 		setIsEdit(false);
+		PubSub.publish('refreshCardList');
+	}
+
+	function handleDelete() {
+		DeleteCard(props.id).then();
 		PubSub.publish('refreshCardList');
 	}
 
@@ -71,7 +78,10 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 											setIsEdit(true);
 										}}
 									/>,
-									<DeleteOutlined key={'delete-button'} />,
+									<DeleteOutlined
+										key={'delete-button'}
+										onClick={() => setIsDeleteModalOpen(true)}
+									/>,
 							  ]
 					}
 				>
@@ -99,6 +109,17 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 					</Form.Item>
 				</Card>
 			</Form>
+			<Modal
+				title="删除卡片"
+				open={isDeleteModalOpen}
+				onOk={handleDelete}
+				onCancel={() => setIsDeleteModalOpen(false)}
+				okText="删除"
+				cancelText="取消"
+				centered
+			>
+				<p>确认删除这条说说吗？</p>
+			</Modal>
 		</div>
 	);
 };
