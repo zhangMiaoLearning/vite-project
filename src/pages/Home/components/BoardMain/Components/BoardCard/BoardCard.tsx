@@ -33,7 +33,11 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 			<Form form={form} onFinish={onFinish}>
 				<Card
 					title={
-						<Form.Item name={'title'} initialValue={props.title}>
+						<Form.Item
+							name={'title'}
+							initialValue={props.title}
+							style={{ margin: 0 }}
+						>
 							{editId == props.id && isEdit ? (
 								<Input placeholder={`请输入标题`} />
 							) : (
@@ -44,12 +48,12 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 					actions={
 						editId == props.id && isEdit
 							? [
-									<Form.Item key={'save-button'}>
+									<Form.Item key={'save-button'} style={{ margin: 0 }}>
 										<Button type="primary" htmlType="submit">
 											保存
 										</Button>
 									</Form.Item>,
-									<Form.Item key={'cancel-button'}>
+									<Form.Item key={'cancel-button'} style={{ margin: 0 }}>
 										<Button onClick={() => setIsEdit(false)}>取消</Button>
 									</Form.Item>,
 							  ]
@@ -80,7 +84,11 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 							</Form.Item>
 						}
 					/>
-					<Form.Item name={'rate'} initialValue={props.rate}>
+					<Form.Item
+						name={'rate'}
+						initialValue={props.rate}
+						style={{ margin: 0 }}
+					>
 						<Rate disabled={!isEdit} />
 					</Form.Item>
 				</Card>

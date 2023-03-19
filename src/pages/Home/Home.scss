@@ -1,9 +1,10 @@
 .main-content {
   margin-top: 4px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 40px;
 
   .main-content-center{
-
+    width: 50vw;
   }
 }

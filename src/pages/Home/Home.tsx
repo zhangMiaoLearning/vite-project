@@ -6,7 +6,7 @@ import BoardSideRight from './components/BoardSideRight/BoardSideRight';
 import { ReduxDemo } from './components/reduxDemo/ReduxDemo';
 
 const Home = () => {
-	const [selectKey, setSelectKey] = useState('');
+	const [selectKey, setSelectKey] = useState('1');
 	const getMainContent = () => {
 		if (selectKey === '1') {
 			return <BoardMain />;

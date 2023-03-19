@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import ArticleCarousel from './Components/ArticleCarousel';
 import BoardCard from './Components/BoardCard/BoardCard';
 import { GetCardInformation } from '../../../../Api/GetCardInformation';
+import './BoardMain.scss';
+import AddCard from './Components/BoardCard/AddCard';
 
 const BoardMain: React.FC = () => {
 	const [cardList, setCardList] = useState([]);
@@ -15,8 +16,8 @@ const BoardMain: React.FC = () => {
 	}, []);
 
 	return (
-		<div className="board-main-top">
-			<ArticleCarousel />
+		<div>
+			<AddCard />
 			{cardList.map(({ id, title, description, rate }) => (
 				<BoardCard
 					key={id}

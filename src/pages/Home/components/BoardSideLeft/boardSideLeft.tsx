@@ -12,7 +12,12 @@ const BoardSideLeft: React.FC<BoardSideLeftProps> = (props) => {
 	};
 	return (
 		<div className="boardSide-content">
-			<Menu mode="inline" items={BoardSideMenu} onClick={onClick} />
+			<Menu
+				mode="inline"
+				items={BoardSideMenu}
+				onClick={onClick}
+				defaultSelectedKeys={['1']}
+			/>
 		</div>
 	);
 };
