@@ -6,5 +6,7 @@
 
   .main-content-center{
     width: 50vw;
+    height: calc(100vh - 50px);
+    overflow: auto;
   }
 }

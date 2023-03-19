@@ -16,7 +16,7 @@ const BoardMain: React.FC = () => {
 	}, []);
 
 	return (
-		<div>
+		<div className="card-display">
 			<AddCard />
 			{cardList.map(({ id, title, description, rate, updateAt }) => (
 				<BoardCard
