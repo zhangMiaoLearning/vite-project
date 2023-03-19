@@ -18,25 +18,11 @@
 	],
 	"card": [
 		{
-			"title": "标题3",
-			"description": "描述3",
+			"title": "title1",
+			"description": "description",
 			"rate": 4,
-			"updateAt": "2023-03-17T11:37:07.911Z",
+			"updateAt": "2023-03-19 17:15:08",
 			"id": 1
-		},
-		{
-			"title": "card title 1",
-			"description": "card description 1",
-			"rate": 5,
-			"updateAt": "2023-03-19T07:28:24.890Z",
-			"id": 2
-		},
-		{
-			"title": "sdfsa",
-			"description": "asdfasdg",
-			"rate": 5,
-			"updateAt": "2023-03-19T08:17:39.353Z",
-			"id": 4
 		}
 	]
 }

@@ -1,12 +1,8 @@
 import { request } from '../Utils/Axios/Axios';
 
 export function PostCard(
-	values: {
-		title: string;
-		description: string;
-		rate: number;
-	},
-	updateAt: typeof Date.prototype
+	values: { title: string; description: string; rate: number },
+	updateAt: null | string
 ) {
 	return request
 		.post('/card', {

@@ -5,18 +5,20 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import TextArea from 'antd/es/input/TextArea';
 import styles from './BoardCard.module.scss';
 import { UpdateCardInformation } from '../../../../../../Api/UpdateCardInformation';
+import { timeTransformation } from '../../../../../../Utils/getTime';
 
 interface BoardCardProps {
 	id: string;
 	title: string;
 	description: string;
 	rate: number;
+	updateAt: string;
 }
 
 const BoardCard: React.FC<BoardCardProps> = (props) => {
 	const [isEdit, setIsEdit] = useState(false);
 	const [editId, setEditId] = useState('');
-	const date = new Date();
+	const date = timeTransformation(new Date());
 	const [form] = Form.useForm();
 
 	function onFinish(values: {
@@ -33,17 +35,20 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 			<Form form={form} onFinish={onFinish}>
 				<Card
 					title={
-						<Form.Item
-							name={'title'}
-							initialValue={props.title}
-							style={{ margin: 0 }}
-						>
-							{editId == props.id && isEdit ? (
-								<Input placeholder={`请输入标题`} />
-							) : (
-								`${props.title}`
-							)}
-						</Form.Item>
+						<div className={styles.title}>
+							<Form.Item
+								name={'title'}
+								initialValue={props.title}
+								style={{ margin: 0 }}
+							>
+								{editId == props.id && isEdit ? (
+									<Input placeholder={`请输入标题`} />
+								) : (
+									`${props.title}`
+								)}
+							</Form.Item>
+							<div className={styles.updateTime}>{props.updateAt}</div>
+						</div>
 					}
 					actions={
 						editId == props.id && isEdit

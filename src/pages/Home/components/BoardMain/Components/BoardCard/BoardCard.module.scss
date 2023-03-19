@@ -1,3 +1,12 @@
 .card {
   margin: 20px;
 }
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.updateTime {
+  font-weight: normal;
+  font-size: small;
+}

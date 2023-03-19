@@ -4,9 +4,10 @@ import TextArea from 'antd/es/input/TextArea';
 import Meta from 'antd/es/card/Meta';
 import { PostCard } from '../../../../../../Api/PostCard';
 import styles from './AddCard.module.scss';
+import { timeTransformation } from '../../../../../../Utils/getTime';
 const AddCard = () => {
 	const [form] = Form.useForm();
-	const date = new Date();
+	const date = timeTransformation(new Date());
 	function onFinish(values: {
 		title: string;
 		description: string;

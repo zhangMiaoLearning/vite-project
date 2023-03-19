@@ -18,13 +18,14 @@ const BoardMain: React.FC = () => {
 	return (
 		<div>
 			<AddCard />
-			{cardList.map(({ id, title, description, rate }) => (
+			{cardList.map(({ id, title, description, rate, updateAt }) => (
 				<BoardCard
 					key={id}
 					id={id}
 					title={title}
 					description={description}
 					rate={rate}
+					updateAt={updateAt}
 				/>
 			))}
 		</div>
