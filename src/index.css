@@ -33,7 +33,6 @@ h1 {
   line-height: 1.1;
 }
 
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -42,19 +41,36 @@ h1 {
   a:hover {
     color: #533657;
   }
-
-  .ant-btn-primary,
-  .ant-btn-primary:hover,
-  .ant-btn-primary:focus {
-    background: #a295d0;
-  }
-  .ant-btn-primary:not(:disabled):hover {
-    background: #8076a6;
-  }
-  .ant-input-affix-wrapper-focused {
-    border-color: #8076a6;
-  }
-  .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
-    border-color: #8076a6;
-  }
 }
+.ant-btn-default {
+  border-color:#8076a6;
+  color: #8076a6;
+}
+.ant-btn-default:not(:disabled):hover {
+  color: #8076a6;
+  border-color:#8076a6;
+}
+
+.ant-btn-primary,
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  background: #a295d0;
+}
+.ant-btn-primary:not(:disabled):hover {
+  background: #8076a6;
+}
+.ant-input-affix-wrapper-focused {
+  border-color: #8076a6;
+}
+
+.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+  border-color: #8076a6;
+}
+
+.ant-input:hover,
+.ant-input:focus {
+  border-color: #a295d0;
+  box-shadow: none;
+}
+
+
