@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Card, Form, Input, Rate } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import Meta from 'antd/es/card/Meta';
-import { PostCard } from '../../../../../../Api/PostCard';
+import { PostCard } from '../../../../../../Api/Card/PostCard';
 import styles from './AddCard.module.scss';
 import { timeTransformation } from '../../../../../../Utils/getTime';
 const AddCard = () => {

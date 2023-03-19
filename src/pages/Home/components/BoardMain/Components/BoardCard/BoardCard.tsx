@@ -4,9 +4,9 @@ import Meta from 'antd/es/card/Meta';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import TextArea from 'antd/es/input/TextArea';
 import styles from './BoardCard.module.scss';
-import { UpdateCardInformation } from '../../../../../../Api/UpdateCardInformation';
+import { UpdateCardInformation } from '../../../../../../Api/Card/UpdateCardInformation';
 import { timeTransformation } from '../../../../../../Utils/getTime';
-import { DeleteCard } from '../../../../../../Api/DeleteCard';
+import { DeleteCard } from '../../../../../../Api/Card/DeleteCard';
 
 interface BoardCardProps {
 	id: string;

@@ -1,4 +1,4 @@
-import { request } from '../Utils/Axios/Axios';
+import { request } from '../../Utils/Axios/Axios';
 
 export function UpdateCardInformation(
 	id: string,

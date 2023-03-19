@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import BoardCard from './Components/BoardCard/BoardCard';
-import { GetCardInformation } from '../../../../Api/GetCardInformation';
+import { GetCardInformation } from '../../../../Api/Card/GetCardInformation';
 import './BoardMain.scss';
 import AddCard from './Components/BoardCard/AddCard';
 import PubSub from 'pubsub-js';

@@ -1,11 +1,14 @@
 import React from 'react';
 import Search from 'antd/es/input/Search';
+import { SearchCard } from '../../../../Api/Card/SearchCard';
 
 const BoardSideRight: React.FC = () => {
-	const onSearch = (value: string) => console.log(value);
+	const onSearch = async (value: string) => {
+		const result = await SearchCard(value).then();
+	};
 	return (
 		<div>
-			<Search placeholder="input search text" onSearch={onSearch} />
+			<Search placeholder="请输入搜索内容" onSearch={onSearch} />
 		</div>
 	);
 };
