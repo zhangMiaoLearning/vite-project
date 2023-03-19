@@ -14,6 +14,8 @@ const AddCard = () => {
 		rate: number;
 	}) {
 		PostCard(values, date).then();
+		form.resetFields();
+		PubSub.publish('refreshCardList');
 	}
 	const onCancel = () => {
 		form.resetFields();
@@ -21,6 +23,7 @@ const AddCard = () => {
 
 	return (
 		<div className={styles.card}>
+			<div className={styles.title}>新增一条说说</div>
 			<Form form={form} onFinish={onFinish}>
 				<Card
 					title={

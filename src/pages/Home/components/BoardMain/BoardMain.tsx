@@ -3,6 +3,7 @@ import BoardCard from './Components/BoardCard/BoardCard';
 import { GetCardInformation } from '../../../../Api/GetCardInformation';
 import './BoardMain.scss';
 import AddCard from './Components/BoardCard/AddCard';
+import PubSub from 'pubsub-js';
 
 const BoardMain: React.FC = () => {
 	const [cardList, setCardList] = useState([]);
@@ -12,7 +13,11 @@ const BoardMain: React.FC = () => {
 	}
 
 	useEffect(() => {
+		const refreshCardList = PubSub.subscribe('refreshCardList', intialData);
 		intialData().then();
+		return () => {
+			PubSub.unsubscribe(refreshCardList);
+		};
 	}, []);
 
 	return (

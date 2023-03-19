@@ -28,6 +28,7 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 	}) {
 		UpdateCardInformation(props.id, values, date).then();
 		setIsEdit(false);
+		PubSub.publish('refreshCardList');
 	}
 
 	return (
