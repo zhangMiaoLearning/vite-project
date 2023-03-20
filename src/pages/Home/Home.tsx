@@ -9,6 +9,7 @@ import { cardStore } from '../../Utils/Store/CardStore';
 import BlogList from './components/BlogList/BlogList';
 import Mouse from '../Components/MouseTracker/Mouse';
 import Heart from '../Components/MouseTracker/Heart';
+import Note from './components/Note/Note';
 
 const Home = () => {
 	const [selectKey, setSelectKey] = useState('1');
@@ -21,6 +22,9 @@ const Home = () => {
 		}
 		if (selectKey === '3') {
 			return <BlogList />;
+		}
+		if (selectKey === '4') {
+			return <Note />;
 		}
 		return null;
 	};

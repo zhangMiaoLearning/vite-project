@@ -1,0 +1,33 @@
+.article {
+  display: flex;
+  flex-direction: column;
+
+  .publish-quill {
+    width: 800px;
+    height: 650px;
+    .ql-editor {
+      min-height: 400px;
+      min-width: 600px;
+    }
+    .ql-snow {
+      background-color: white;
+    }
+    .ql-blank {
+      background-color: white;
+    }
+  }
+  .title {
+    font-weight: bold;
+    margin: 10px 0;
+    color: #242424;
+    font-size: 16px;
+  }
+  .article-button {
+    margin-top: 20px;
+    width: 800px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+  }
+}
+
