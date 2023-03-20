@@ -4,6 +4,11 @@ import './Home.scss';
 import BoardMain from './components/BoardMain/BoardMain';
 import BoardSideRight from './components/BoardSideRight/BoardSideRight';
 import { ReduxDemo } from './components/reduxDemo/ReduxDemo';
+import { Provider } from 'react-redux';
+import { cardStore } from '../../Utils/Store/CardStore';
+import BlogList from './components/BlogList/BlogList';
+import Mouse from '../Components/MouseTracker/Mouse';
+import Heart from '../Components/MouseTracker/Heart';
 
 const Home = () => {
 	const [selectKey, setSelectKey] = useState('1');
@@ -14,15 +19,22 @@ const Home = () => {
 		if (selectKey === '2') {
 			return <ReduxDemo />;
 		}
+		if (selectKey === '3') {
+			return <BlogList />;
+		}
 		return null;
 	};
 
 	return (
-		<div className="main-content">
-			<BoardSideLeft setSelectKey={setSelectKey} />
-			<section className="main-content-center">{getMainContent()}</section>
-			<BoardSideRight />
-		</div>
+		<Provider store={cardStore}>
+			<Mouse render={(mouse) => <Heart mouse={mouse} />}>
+				<div className="main-content">
+					<BoardSideLeft setSelectKey={setSelectKey} />
+					<section className="main-content-center">{getMainContent()}</section>
+					<BoardSideRight />
+				</div>
+			</Mouse>
+		</Provider>
 	);
 };
 export default Home;

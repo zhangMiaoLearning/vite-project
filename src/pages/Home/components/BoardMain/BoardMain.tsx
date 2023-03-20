@@ -4,6 +4,8 @@ import { GetCardInformation } from '../../../../Api/Card/GetCardInformation';
 import './BoardMain.scss';
 import AddCard from './Components/BoardCard/AddCard';
 import PubSub from 'pubsub-js';
+import { useDispatch, useSelector } from 'react-redux';
+import { GET_CARD_LIST } from '../../../../Utils/Action/CardAction';
 
 const BoardMain: React.FC = () => {
 	const [cardList, setCardList] = useState([]);
@@ -19,7 +21,21 @@ const BoardMain: React.FC = () => {
 			PubSub.unsubscribe(refreshCardList);
 		};
 	}, []);
-
+	// const dispatch = useDispatch();
+	// useEffect(() => {
+	// 	dispatch({ type: GET_CARD_LIST });
+	// });
+	//
+	// const cardList: [
+	// 	{
+	// 		id: string;
+	// 		title: string;
+	// 		description: string;
+	// 		rate: number;
+	// 		updateAt: string;
+	// 	}
+	// ] = useSelector((state: any) => state.cardList);
+	// console.log(cardList);
 	return (
 		<div className="card-display">
 			<AddCard />
