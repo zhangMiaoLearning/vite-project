@@ -5,17 +5,30 @@ import Meta from 'antd/es/card/Meta';
 import { PostCard } from '../../../../../../Api/Card/PostCard';
 import styles from './AddCard.module.scss';
 import { timeTransformation } from '../../../../../../Utils/getTime';
+import { useDispatch } from 'react-redux';
+import { addCard } from '../../../../../../Utils/Reducer/CardReducer';
 const AddCard = () => {
 	const [form] = Form.useForm();
 	const date = timeTransformation(new Date());
+
+	const dispatch = useDispatch();
 	function onFinish(values: {
 		title: string;
 		description: string;
 		rate: number;
 	}) {
-		PostCard(values, date).then();
-		form.resetFields();
-		PubSub.publish('refreshCardList');
+		// PostCard(values, date).then();
+		// form.resetFields();
+		// PubSub.publish('refreshCardList');
+		dispatch(
+			addCard({
+				id: '2',
+				title: values.title,
+				rate: values.rate,
+				description: values.description,
+				updateAt: date,
+			})
+		);
 	}
 	const onCancel = () => {
 		form.resetFields();

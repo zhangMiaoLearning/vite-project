@@ -6,36 +6,25 @@ import AddCard from './Components/BoardCard/AddCard';
 import PubSub from 'pubsub-js';
 import { useDispatch, useSelector } from 'react-redux';
 import { GET_CARD_LIST } from '../../../../Utils/Action/CardAction';
+import { RootState } from '../../../../Utils/Store/CardStore';
 
 const BoardMain: React.FC = () => {
-	const [cardList, setCardList] = useState([]);
-	async function intialData() {
-		const result = await GetCardInformation().then();
-		setCardList(result);
-	}
-
-	useEffect(() => {
-		const refreshCardList = PubSub.subscribe('refreshCardList', intialData);
-		intialData().then();
-		return () => {
-			PubSub.unsubscribe(refreshCardList);
-		};
-	}, []);
-	// const dispatch = useDispatch();
-	// useEffect(() => {
-	// 	dispatch({ type: GET_CARD_LIST });
-	// });
+	//const [cardList, setCardList] = useState([]);
+	// async function intialData() {
+	// 	const result = await GetCardInformation().then();
+	// 	setCardList(result);
+	// }
 	//
-	// const cardList: [
-	// 	{
-	// 		id: string;
-	// 		title: string;
-	// 		description: string;
-	// 		rate: number;
-	// 		updateAt: string;
-	// 	}
-	// ] = useSelector((state: any) => state.cardList);
-	// console.log(cardList);
+	// useEffect(() => {
+	// 	const refreshCardList = PubSub.subscribe('refreshCardList', intialData);
+	// 	intialData().then();
+	// 	return () => {
+	// 		PubSub.unsubscribe(refreshCardList);
+	// 	};
+	// }, []);
+
+	const cardList = useSelector((state: RootState) => state.cardList.cardList);
+
 	return (
 		<div className="card-display">
 			<AddCard />
