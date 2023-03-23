@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import BoardCard from './Components/BoardCard/BoardCard';
 import { GetCardInformation } from '../../../../Api/Card/GetCardInformation';
 import './BoardMain.scss';
@@ -8,9 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GET_CARD_LIST } from '../../../../Utils/Action/CardAction';
 import { RootDispatch, RootState } from '../../../../Utils/Store/CardStore';
 import { getCardList } from '../../../../Utils/Reducer/CardReducer';
+import { GlobalContext } from '../../../../Utils/Store/GlobalProvider';
 
 const BoardMain: React.FC = () => {
-	const [cardList, setCardList] = useState([]);
+	const { cardList, setCardList } = useContext(GlobalContext);
 	async function intialData() {
 		const result = await GetCardInformation().then();
 		setCardList(result);

@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Header.scss';
 import { Avatar, Breadcrumb } from 'antd';
 import { items } from './HeaderMenu';
 import { useLocation } from 'react-router-dom';
-import { GlobalContext } from '../../../Utils/Store/GlobalProvider';
 
 const Header: React.FC = () => {
 	const userName = sessionStorage.getItem('userName');

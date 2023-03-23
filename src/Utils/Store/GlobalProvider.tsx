@@ -5,9 +5,20 @@ interface userInfo {
 	username: string;
 }
 
+interface cardInfo {
+	title: string;
+	description: string;
+	rate: number;
+	updateAt: string;
+	userName: string;
+	id: string;
+}
+
 interface GlobalContextProps {
 	currentUserInfo: userInfo;
 	setCurrentUserInfo: Dispatch<SetStateAction<userInfo>>;
+	cardList: cardInfo[];
+	setCardList: Dispatch<SetStateAction<cardInfo[]>>;
 }
 export const GlobalContext = React.createContext<GlobalContextProps>(
 	{} as GlobalContextProps
@@ -19,9 +30,12 @@ const GlobalProvider: React.FC<CaughtProviderProps> = ({ children }) => {
 	const [currentUserInfo, setCurrentUserInfo] = useState<userInfo>(
 		{} as userInfo
 	);
+	const [cardList, setCardList] = useState<cardInfo[]>([]);
 
 	return (
-		<GlobalContext.Provider value={{ currentUserInfo, setCurrentUserInfo }}>
+		<GlobalContext.Provider
+			value={{ currentUserInfo, setCurrentUserInfo, cardList, setCardList }}
+		>
 			{children}
 		</GlobalContext.Provider>
 	);
