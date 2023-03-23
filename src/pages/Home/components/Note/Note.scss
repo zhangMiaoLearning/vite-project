@@ -1,10 +1,17 @@
 .article {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  .article-form {
+    .input-title {
+      background-color: rgba(0, 0, 0, 0.04);
+      width: 788px;
+    }
+  }
 
   .publish-quill {
     width: 800px;
-    height: 650px;
+    height: 710px;
     .ql-editor {
       min-height: 400px;
       min-width: 600px;
