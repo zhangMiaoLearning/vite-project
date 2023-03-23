@@ -18,7 +18,7 @@ const Note = () => {
 		title: 'null',
 		content: null,
 	});
-
+	const currentUserName = sessionStorage.getItem('userName');
 	function handleAdd(values: { title: string; content: HTMLInputElement }) {
 		setIsModalOpen(true);
 		setModalTitle('添加文章');
@@ -29,7 +29,7 @@ const Note = () => {
 
 	const handleConfirm = () => {
 		if (modalTitle === '添加文章') {
-			AddArticle(formValues);
+			AddArticle(formValues, currentUserName);
 		}
 		setIsModalOpen(false);
 		form.resetFields();

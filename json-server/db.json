@@ -42,5 +42,12 @@
 			"id": 3
 		}
 	],
-	"article": []
+	"article": [
+		{
+			"title": "adsgfasdg",
+			"content": "<p>drgda</p>",
+			"userName": "admin",
+			"id": 1
+		}
+	]
 }
