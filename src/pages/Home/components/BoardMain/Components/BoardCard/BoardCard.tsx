@@ -23,13 +23,14 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 	const date = timeTransformation(new Date());
 	const [form] = Form.useForm();
+	const currentUserName = sessionStorage.getItem('userName');
 
 	function onFinish(values: {
 		title: string;
 		description: string;
 		rate: number;
 	}) {
-		UpdateCardInformation(props.id, values, date).then();
+		UpdateCardInformation(props.id, values, date, currentUserName).then();
 		setIsEdit(false);
 		PubSub.publish('refreshCardList');
 	}
@@ -63,30 +64,32 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 						</div>
 					}
 					actions={
-						editId == props.id && isEdit
-							? [
-									<Form.Item key={'save-button'} style={{ margin: 0 }}>
-										<Button type="primary" htmlType="submit">
-											保存
-										</Button>
-									</Form.Item>,
-									<Form.Item key={'cancel-button'} style={{ margin: 0 }}>
-										<Button onClick={() => setIsEdit(false)}>取消</Button>
-									</Form.Item>,
-							  ]
-							: [
-									<EditOutlined
-										key="edit"
-										onClick={() => {
-											setEditId(props.id);
-											setIsEdit(true);
-										}}
-									/>,
-									<DeleteOutlined
-										key={'delete-button'}
-										onClick={() => setIsDeleteModalOpen(true)}
-									/>,
-							  ]
+						currentUserName === props.userName
+							? editId === props.id && isEdit
+								? [
+										<Form.Item key={'save-button'} style={{ margin: 0 }}>
+											<Button type="primary" htmlType="submit">
+												保存
+											</Button>
+										</Form.Item>,
+										<Form.Item key={'cancel-button'} style={{ margin: 0 }}>
+											<Button onClick={() => setIsEdit(false)}>取消</Button>
+										</Form.Item>,
+								  ]
+								: [
+										<EditOutlined
+											key="edit"
+											onClick={() => {
+												setEditId(props.id);
+												setIsEdit(true);
+											}}
+										/>,
+										<DeleteOutlined
+											key={'delete-button'}
+											onClick={() => setIsDeleteModalOpen(true)}
+										/>,
+								  ]
+							: []
 					}
 				>
 					<Meta
