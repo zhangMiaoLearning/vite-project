@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Form, Input, Rate } from 'antd';
+import { Button, Card, Form, Input, message, Rate } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import Meta from 'antd/es/card/Meta';
 import { PostCard } from '../../../../../../Api/Card/PostCard';
@@ -18,9 +18,13 @@ const AddCard = () => {
 		description: string;
 		rate: number;
 	}) {
-		PostCard(values, date, uerName).then();
-		form.resetFields();
-		PubSub.publish('refreshCardList');
+		if (values.title) {
+			PostCard(values, date, uerName).then();
+			form.resetFields();
+			PubSub.publish('refreshCardList');
+		} else {
+			message.error('请输入标题');
+		}
 		// dispatch(
 		// 	addCard({
 		// 		id: '2',
