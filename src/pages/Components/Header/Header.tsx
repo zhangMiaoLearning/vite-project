@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { GlobalContext } from '../../../Utils/Store/GlobalProvider';
 
 const Header: React.FC = () => {
-	const { currentUserInfo } = useContext(GlobalContext);
+	const userName = sessionStorage.getItem('userName');
 	const location = useLocation();
 	const [currentPath, setCurrentPath] = useState('/');
 	const isLoginPage = currentPath === '/login';
@@ -21,7 +21,7 @@ const Header: React.FC = () => {
 				<>
 					<Breadcrumb className="header-menu" items={items} />
 					<section className="header-user">
-						<Avatar>{currentUserInfo.username}</Avatar>
+						<Avatar>{userName}</Avatar>
 					</section>
 				</>
 			);

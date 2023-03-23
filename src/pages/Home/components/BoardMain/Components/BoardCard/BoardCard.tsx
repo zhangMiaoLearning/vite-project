@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, Form, Input, Modal, Rate } from 'antd';
+import { Avatar, Button, Card, Form, Input, Modal, Rate } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import TextArea from 'antd/es/input/TextArea';
@@ -13,7 +13,8 @@ interface BoardCardProps {
 	title: string;
 	description: string;
 	rate: number;
-	updateAt: string;
+	updateAt: string | null;
+	userName: string | null;
 }
 
 const BoardCard: React.FC<BoardCardProps> = (props) => {
@@ -55,7 +56,10 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 									`${props.title}`
 								)}
 							</Form.Item>
-							<div className={styles.updateTime}>{props.updateAt}</div>
+							<section className={styles.user}>
+								<Avatar className={styles.userColor}>{props.userName}</Avatar>
+								<div className={styles.updateTime}>{props.updateAt}</div>
+							</section>
 						</div>
 					}
 					actions={

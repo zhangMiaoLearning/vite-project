@@ -6,35 +6,43 @@ import AddCard from './Components/BoardCard/AddCard';
 import PubSub from 'pubsub-js';
 import { useDispatch, useSelector } from 'react-redux';
 import { GET_CARD_LIST } from '../../../../Utils/Action/CardAction';
-import { RootState } from '../../../../Utils/Store/CardStore';
+import { RootDispatch, RootState } from '../../../../Utils/Store/CardStore';
+import { getCardList } from '../../../../Utils/Reducer/CardReducer';
 
 const BoardMain: React.FC = () => {
-	//const [cardList, setCardList] = useState([]);
-	// async function intialData() {
-	// 	const result = await GetCardInformation().then();
-	// 	setCardList(result);
-	// }
-	//
-	// useEffect(() => {
-	// 	const refreshCardList = PubSub.subscribe('refreshCardList', intialData);
-	// 	intialData().then();
-	// 	return () => {
-	// 		PubSub.unsubscribe(refreshCardList);
-	// 	};
-	// }, []);
+	const [cardList, setCardList] = useState([]);
+	async function intialData() {
+		const result = await GetCardInformation().then();
+		setCardList(result);
+	}
 
-	const cardList = useSelector((state: RootState) => state.cardList.cardList);
+	useEffect(() => {
+		intialData().then();
+		const refreshCardList = PubSub.subscribe('refreshCardList', intialData);
+		return () => {
+			PubSub.unsubscribe(refreshCardList);
+		};
+	}, []);
+
+	// const dispatch: RootDispatch = useDispatch();
+
+	// useEffect(() => {
+	// 	dispatch(getCardList());
+	// }, []);
+	//
+	// const cardList = useSelector((state: RootState) => state.cardList.cardList);
 
 	return (
 		<div className="card-display">
 			<AddCard />
-			{cardList.map(({ id, title, description, rate, updateAt }) => (
+			{cardList.map(({ id, title, description, rate, updateAt, userName }) => (
 				<BoardCard
 					key={id}
 					id={id}
 					title={title}
 					description={description}
 					rate={rate}
+					userName={userName}
 					updateAt={updateAt}
 				/>
 			))}

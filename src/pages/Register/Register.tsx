@@ -20,6 +20,7 @@ const Register = () => {
 			const result = await RegisterApi(values).then();
 			if (result) {
 				navigate('/home');
+				sessionStorage.setItem('userName', values.userName);
 			}
 		}
 	}

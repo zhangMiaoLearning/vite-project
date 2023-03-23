@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Button, Form, Input, message, Modal } from 'antd';
+import { Button, Form, Input, Modal } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { LoginApi } from '../../../Api/LoginApi';
 import { useNavigate } from 'react-router-dom';
@@ -9,15 +9,16 @@ import './LoginForm.scss';
 const LoginForm = () => {
 	const { setCurrentUserInfo } = useContext(GlobalContext);
 	const navigate = useNavigate();
+
 	async function onFinish(values: { username: string; password: string }) {
 		const result = await LoginApi(values).then();
 		if (result) {
 			navigate('/home');
 			setCurrentUserInfo({ id: result.id, username: result.username });
-		} else {
-			message.error('用户名或密码错误');
+			sessionStorage.setItem('userName', result.username);
 		}
 	}
+
 	function onFinishFailed() {
 		Modal.error({
 			title: '提示',
