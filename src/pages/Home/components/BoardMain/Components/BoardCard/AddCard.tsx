@@ -2,38 +2,33 @@ import React from 'react';
 import { Button, Card, Form, Input, message, Rate } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import Meta from 'antd/es/card/Meta';
-import { PostCard } from '../../../../../../Api/Card/PostCard';
 import styles from './AddCard.module.scss';
 import { timeTransformation } from '../../../../../../Utils/getTime';
-import { useDispatch } from 'react-redux';
+import { useAddCardMutation } from '../../../../../../Slice/apiSlice';
 
 const AddCard = () => {
 	const [form] = Form.useForm();
 	const date = timeTransformation(new Date());
-	const uerName = sessionStorage.getItem('userName');
+	const userName = sessionStorage.getItem('userName');
+	const [addCard] = useAddCardMutation();
 
-	// const dispatch = useDispatch();
 	function onFinish(values: {
 		title: string;
 		description: string;
 		rate: number;
 	}) {
 		if (values.title) {
-			PostCard(values, date, uerName).then();
+			addCard({
+				title: values.title,
+				description: values.description,
+				rate: values.rate,
+				updateAt: date,
+				userName: userName,
+			});
 			form.resetFields();
-			PubSub.publish('refreshCardList');
 		} else {
 			message.error('请输入标题');
 		}
-		// dispatch(
-		// 	addCard({
-		// 		id: '2',
-		// 		title: values.title,
-		// 		rate: values.rate,
-		// 		description: values.description,
-		// 		updateAt: date,
-		// 	})
-		// );
 	}
 	const onCancel = () => {
 		form.resetFields();

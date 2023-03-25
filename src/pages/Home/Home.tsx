@@ -4,12 +4,14 @@ import './Home.scss';
 import BoardMain from './components/BoardMain/BoardMain';
 import BoardSideRight from './components/BoardSideRight/BoardSideRight';
 import { ReduxDemo } from './components/reduxDemo/ReduxDemo';
-import { Provider } from 'react-redux';
-import { cardStore } from '../../Utils/Store/CardStore';
+
 import BlogList from './components/BlogList/BlogList';
 import Mouse from '../Components/MouseTracker/Mouse';
 import Heart from '../Components/MouseTracker/Heart';
 import Note from './components/Note/Note';
+
+import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
+import { apiSlice } from '../../Slice/apiSlice';
 
 const Home = () => {
 	const [selectKey, setSelectKey] = useState('1');
@@ -30,7 +32,7 @@ const Home = () => {
 	};
 
 	return (
-		<Provider store={cardStore}>
+		<ApiProvider api={apiSlice}>
 			<Mouse render={(mouse) => <Heart mouse={mouse} />}>
 				<div className="main-content">
 					<BoardSideLeft setSelectKey={setSelectKey} />
@@ -38,7 +40,7 @@ const Home = () => {
 					<BoardSideRight />
 				</div>
 			</Mouse>
-		</Provider>
+		</ApiProvider>
 	);
 };
 export default Home;

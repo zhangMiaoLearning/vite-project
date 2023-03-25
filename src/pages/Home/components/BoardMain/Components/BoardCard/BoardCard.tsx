@@ -4,9 +4,11 @@ import Meta from 'antd/es/card/Meta';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import TextArea from 'antd/es/input/TextArea';
 import styles from './BoardCard.module.scss';
-import { UpdateCardInformation } from '../../../../../../Api/Card/UpdateCardInformation';
 import { timeTransformation } from '../../../../../../Utils/getTime';
-import { DeleteCard } from '../../../../../../Api/Card/DeleteCard';
+import {
+	useDeleteCardMutation,
+	useUpdateCardMutation,
+} from '../../../../../../Slice/apiSlice';
 
 interface BoardCardProps {
 	id: string;
@@ -25,19 +27,26 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 	const [form] = Form.useForm();
 	const currentUserName = sessionStorage.getItem('userName');
 
+	const [updateCard] = useUpdateCardMutation();
+	const [deleteCard] = useDeleteCardMutation();
+
 	function onFinish(values: {
 		title: string;
 		description: string;
 		rate: number;
 	}) {
-		UpdateCardInformation(props.id, values, date, currentUserName).then();
+		updateCard({
+			id: props.id,
+			title: values.title,
+			description: values.description,
+			rate: values.rate,
+			updateAt: date,
+			userName: currentUserName,
+		});
 		setIsEdit(false);
-		PubSub.publish('refreshCardList');
 	}
-
 	function handleDelete() {
-		DeleteCard(props.id).then();
-		PubSub.publish('refreshCardList');
+		deleteCard(props.id);
 	}
 
 	return (
