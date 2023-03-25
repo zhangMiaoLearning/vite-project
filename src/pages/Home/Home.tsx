@@ -10,8 +10,8 @@ import Mouse from '../Components/MouseTracker/Mouse';
 import Heart from '../Components/MouseTracker/Heart';
 import Note from './components/Note/Note';
 
-import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
-import { apiSlice } from '../../Slice/apiSlice';
+import { Provider } from 'react-redux';
+import { store } from '../../Store/Store';
 
 const Home = () => {
 	const [selectKey, setSelectKey] = useState('1');
@@ -32,7 +32,7 @@ const Home = () => {
 	};
 
 	return (
-		<ApiProvider api={apiSlice}>
+		<Provider store={store}>
 			<Mouse render={(mouse) => <Heart mouse={mouse} />}>
 				<div className="main-content">
 					<BoardSideLeft setSelectKey={setSelectKey} />
@@ -40,7 +40,7 @@ const Home = () => {
 					<BoardSideRight />
 				</div>
 			</Mouse>
-		</ApiProvider>
+		</Provider>
 	);
 };
 export default Home;
