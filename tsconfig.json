@@ -1,43 +1,42 @@
 //编译器选项
 {
-  "compilerOptions": {
-    //设置ts被编译的es版本
-    //"ESNext"最新版本es
-    "target": "ESNext",
-    //将 class 声明中的字段语义从 [[Set]] 变更到 [[Define]]
-    "useDefineForClassFields": true,
-    //library 指定项目中用到的库，一般情况不用改，不在浏览器中运行的时候改一下
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    //是否对js进行编译
-    //checkJs是否检查js代码符合规范
-    "allowJs": false,
-    "skipLibCheck": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    //所有严格模式的总开关
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    //指定要使用的模块化规范
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    //不生成编译后的文件
-    "noEmit": true,
-    //noEmitOnError：当有错的时候不编译
-    "jsx": "react-jsx",
-    //"outDir":编译后文件所在目录
-    //"outFile"：将全局作用域的代码合并到一个文件
-    //noImplicitAny:不允许any（true/false）
-    //noImplicitThis:不允许不明确类型的this（true/false）
-    //strictNullChecks:严格价差空值（true/false）
-  },
-  //include
-  //用来制定哪些ts文件需要编译
-  //路径：**表示任意目录
-  //*表示任意文件
-  //exclude:排除 默认值：【"node_modules","bower_components","jspm_packages"】
-  //extends:继承
-  "include": ["./src/**/*"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+	"compilerOptions": {
+		//设置ts被编译的es版本
+		//"ESNext"最新版本es
+		"target": "ESNext",
+		//将 class 声明中的字段语义从 [[Set]] 变更到 [[Define]]
+		"useDefineForClassFields": true,
+		//library 指定项目中用到的库，一般情况不用改，不在浏览器中运行的时候改一下
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		//是否对js进行编译
+		//checkJs是否检查js代码符合规范
+		"allowJs": false,
+		"skipLibCheck": true,
+		"esModuleInterop": false,
+		"allowSyntheticDefaultImports": true,
+		//所有严格模式的总开关
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		//指定要使用的模块化规范
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"resolveJsonModule": true,
+		//不生成编译后的文件
+		"noEmit": true,
+		//noEmitOnError：当有错的时候不编译
+		"jsx": "react-jsx"
+		//"outDir":编译后文件所在目录
+		//"outFile"：将全局作用域的代码合并到一个文件
+		//noImplicitAny:不允许any（true/false）
+		//noImplicitThis:不允许不明确类型的this（true/false）
+		//strictNullChecks:严格价差空值（true/false）
+	},
+	//include
+	//用来制定哪些ts文件需要编译
+	//路径：**表示任意目录
+	//*表示任意文件
+	//exclude:排除 默认值：【"node_modules","bower_components","jspm_packages"】
+	//extends:继承
+	"include": ["./src/**/*"],
+	"references": [{ "path": "./tsconfig.node.json" }]
 }
