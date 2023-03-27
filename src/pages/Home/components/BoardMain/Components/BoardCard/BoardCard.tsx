@@ -4,11 +4,6 @@ import Meta from 'antd/es/card/Meta';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import TextArea from 'antd/es/input/TextArea';
 import styles from './BoardCard.module.scss';
-import {
-	setEditId,
-	setIsDeleteModalOpen,
-	setIsEdit,
-} from '../../../../../../Slice/cardSlice';
 import { useCardAction } from './hooks';
 
 interface BoardCardProps {
@@ -25,7 +20,9 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 		isEdit,
 		editId,
 		isDeleteModalOpen,
-		dispatch,
+		onCloseEdit,
+		onOpenEdit,
+		onOpenDeleteModal,
 		form,
 		currentUserName,
 		onFinish,
@@ -65,22 +62,14 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 											</Button>
 										</Form.Item>,
 										<Form.Item key={'cancel-button'} style={{ margin: 0 }}>
-											<Button onClick={() => dispatch(setIsEdit(false))}>
-												取消
-											</Button>
+											<Button onClick={onCloseEdit}>取消</Button>
 										</Form.Item>,
 								  ]
 								: [
-										<EditOutlined
-											key="edit"
-											onClick={() => {
-												dispatch(setIsEdit(true));
-												dispatch(setEditId(props.id));
-											}}
-										/>,
+										<EditOutlined key="edit" onClick={onOpenEdit} />,
 										<DeleteOutlined
 											key={'delete-button'}
-											onClick={() => dispatch(setIsDeleteModalOpen(true))}
+											onClick={() => onOpenDeleteModal(true)}
 										/>,
 								  ]
 							: []
@@ -114,7 +103,7 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 				title="删除卡片"
 				open={isDeleteModalOpen}
 				onOk={handleDelete}
-				onCancel={() => dispatch(setIsDeleteModalOpen(false))}
+				onCancel={() => onOpenDeleteModal(false)}
 				okText="删除"
 				cancelText="取消"
 				centered

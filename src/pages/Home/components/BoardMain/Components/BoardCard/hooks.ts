@@ -6,6 +6,8 @@ import {
 } from '../../../../../../Slice/apiSlice';
 import { Form } from 'antd';
 import {
+	setDeleteId,
+	setEditId,
 	setIsDeleteModalOpen,
 	setIsEdit,
 } from '../../../../../../Slice/cardSlice';
@@ -23,7 +25,17 @@ export const useCardAction = (props: BoardCardProps) => {
 	const isDeleteModalOpen = useSelector(
 		(state: any) => state.editCard.isDeleteModalOpen
 	);
+	const deleteId = useSelector((state: any) => state.editCard.deleteId);
 	const dispatch = useDispatch();
+	const onCloseEdit = () => dispatch(setIsEdit(false));
+	const onOpenEdit = () => {
+		dispatch(setIsEdit(true));
+		dispatch(setEditId(props.id));
+	};
+	const onOpenDeleteModal = (newOpen: boolean) => {
+		dispatch(setIsDeleteModalOpen(newOpen));
+		dispatch(setDeleteId(props.id));
+	};
 
 	const date = timeTransformation(new Date());
 	const [form] = Form.useForm();
@@ -49,7 +61,7 @@ export const useCardAction = (props: BoardCardProps) => {
 	}
 
 	function handleDelete() {
-		deleteCard(props.id);
+		deleteCard(deleteId);
 		dispatch(setIsDeleteModalOpen(false));
 	}
 
@@ -58,6 +70,9 @@ export const useCardAction = (props: BoardCardProps) => {
 		editId,
 		isDeleteModalOpen,
 		dispatch,
+		onCloseEdit,
+		onOpenEdit,
+		onOpenDeleteModal,
 		form,
 		currentUserName,
 		onFinish,
