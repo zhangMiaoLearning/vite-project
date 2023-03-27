@@ -1,10 +1,11 @@
 import React from 'react';
-import { Avatar, Button, Card, Form, Input, Modal, Rate } from 'antd';
+import { Avatar, Button, Card, Form, Input, Rate } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import TextArea from 'antd/es/input/TextArea';
 import styles from './BoardCard.module.scss';
 import { useCardAction } from './hooks';
+import DeleteCardModal from './DeleteCardModal/DeleteCardModal';
 
 interface BoardCardProps {
 	id: string;
@@ -19,14 +20,12 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 	const {
 		isEdit,
 		editId,
-		isDeleteModalOpen,
 		onCloseEdit,
 		onOpenEdit,
 		onOpenDeleteModal,
 		form,
 		currentUserName,
 		onFinish,
-		handleDelete,
 	} = useCardAction(props);
 
 	return (
@@ -99,17 +98,7 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 					</Form.Item>
 				</Card>
 			</Form>
-			<Modal
-				title="删除卡片"
-				open={isDeleteModalOpen}
-				onOk={handleDelete}
-				onCancel={() => onOpenDeleteModal(false)}
-				okText="删除"
-				cancelText="取消"
-				centered
-			>
-				<p>确认删除这条说说吗？</p>
-			</Modal>
+			<DeleteCardModal id={props.id} />
 		</div>
 	);
 };

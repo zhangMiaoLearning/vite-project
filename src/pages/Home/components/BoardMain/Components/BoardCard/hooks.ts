@@ -13,11 +13,11 @@ import {
 } from '../../../../../../Slice/cardSlice';
 interface BoardCardProps {
 	id: string;
-	title: string;
-	description: string;
-	rate: number;
-	updateAt: string | null;
-	userName: string | null;
+	title?: string;
+	description?: string;
+	rate?: number;
+	updateAt?: string | null;
+	userName?: string | null;
 }
 export const useCardAction = (props: BoardCardProps) => {
 	const isEdit = useSelector((state: any) => state.editCard.isEdit);
