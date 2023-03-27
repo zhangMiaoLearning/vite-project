@@ -39,11 +39,7 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 								initialValue={props.title}
 								style={{ margin: 0 }}
 							>
-								{editId == props.id && isEdit ? (
-									<Input placeholder={`请输入标题`} />
-								) : (
-									`${props.title}`
-								)}
+								{editId == props.id && isEdit ? <Input /> : `${props.title}`}
 							</Form.Item>
 							<section className={styles.user}>
 								<Avatar className={styles.userColor}>{props.userName}</Avatar>
