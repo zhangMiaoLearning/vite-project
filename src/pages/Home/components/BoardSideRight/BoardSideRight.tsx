@@ -1,14 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Search from 'antd/es/input/Search';
-import { SearchCard } from '../../../../Api/Card/SearchCard';
-import { GlobalContext } from '../../../../Utils/Store/GlobalProvider';
 import './BoardSideRight.scss';
+import { useSearchCardQuery } from '../../../../Slice/apiSlice';
 
 const BoardSideRight: React.FC = () => {
-	const { setCardList } = useContext(GlobalContext);
-	const onSearch = async (value: string) => {
-		const result = await SearchCard(value).then();
-		setCardList(result);
+	const onSearch = (value: string) => {
+		const { data: cardList } = useSearchCardQuery(value);
+		console.log(cardList);
 	};
 	return (
 		<div>

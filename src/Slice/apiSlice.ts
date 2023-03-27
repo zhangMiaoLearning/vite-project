@@ -15,7 +15,7 @@ export const apiSlice = createApi({
 	endpoints: (builder) => ({
 		getCard: builder.query<Card[], void>({
 			query: () => ({
-				url: '/card?sort=updateAt&_order=desc',
+				url: '/card',
 			}),
 			providesTags: ['card'],
 		}),
@@ -74,6 +74,12 @@ export const apiSlice = createApi({
 			}),
 			invalidatesTags: ['card'],
 		}),
+		searchCard: builder.query<Card[], string>({
+			query: (value) => ({
+				url: `/card?title_like=${value}`,
+			}),
+			providesTags: ['card'],
+		}),
 	}),
 });
 export const {
@@ -81,4 +87,5 @@ export const {
 	useAddCardMutation,
 	useUpdateCardMutation,
 	useDeleteCardMutation,
+	useSearchCardQuery,
 } = apiSlice;

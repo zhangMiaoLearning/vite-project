@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Avatar, Button, Card, Form, Input, Modal, Rate } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import TextArea from 'antd/es/input/TextArea';
 import styles from './BoardCard.module.scss';
-import { timeTransformation } from '../../../../../../Utils/getTime';
 import {
-	useDeleteCardMutation,
-	useUpdateCardMutation,
-} from '../../../../../../Slice/apiSlice';
+	setEditId,
+	setIsDeleteModalOpen,
+	setIsEdit,
+} from '../../../../../../Slice/cardSlice';
+import { useCardAction } from './hooks';
 
 interface BoardCardProps {
 	id: string;
@@ -20,34 +21,16 @@ interface BoardCardProps {
 }
 
 const BoardCard: React.FC<BoardCardProps> = (props) => {
-	const [isEdit, setIsEdit] = useState(false);
-	const [editId, setEditId] = useState('');
-	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-	const date = timeTransformation(new Date());
-	const [form] = Form.useForm();
-	const currentUserName = sessionStorage.getItem('userName');
-
-	const [updateCard] = useUpdateCardMutation();
-	const [deleteCard] = useDeleteCardMutation();
-
-	function onFinish(values: {
-		title: string;
-		description: string;
-		rate: number;
-	}) {
-		updateCard({
-			id: props.id,
-			title: values.title,
-			description: values.description,
-			rate: values.rate,
-			updateAt: date,
-			userName: currentUserName,
-		});
-		setIsEdit(false);
-	}
-	function handleDelete() {
-		deleteCard(props.id);
-	}
+	const {
+		isEdit,
+		editId,
+		isDeleteModalOpen,
+		dispatch,
+		form,
+		currentUserName,
+		onFinish,
+		handleDelete,
+	} = useCardAction(props);
 
 	return (
 		<div className={styles.card} key={props.id}>
@@ -82,20 +65,22 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 											</Button>
 										</Form.Item>,
 										<Form.Item key={'cancel-button'} style={{ margin: 0 }}>
-											<Button onClick={() => setIsEdit(false)}>取消</Button>
+											<Button onClick={() => dispatch(setIsEdit(false))}>
+												取消
+											</Button>
 										</Form.Item>,
 								  ]
 								: [
 										<EditOutlined
 											key="edit"
 											onClick={() => {
-												setEditId(props.id);
-												setIsEdit(true);
+												dispatch(setIsEdit(true));
+												dispatch(setEditId(props.id));
 											}}
 										/>,
 										<DeleteOutlined
 											key={'delete-button'}
-											onClick={() => setIsDeleteModalOpen(true)}
+											onClick={() => dispatch(setIsDeleteModalOpen(true))}
 										/>,
 								  ]
 							: []
@@ -129,7 +114,7 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 				title="删除卡片"
 				open={isDeleteModalOpen}
 				onOk={handleDelete}
-				onCancel={() => setIsDeleteModalOpen(false)}
+				onCancel={() => dispatch(setIsDeleteModalOpen(false))}
 				okText="删除"
 				cancelText="取消"
 				centered

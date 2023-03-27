@@ -1,38 +1,12 @@
 import React from 'react';
-import { Button, Card, Form, Input, message, Rate } from 'antd';
+import { Button, Card, Form, Input, Rate } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import Meta from 'antd/es/card/Meta';
 import styles from './AddCard.module.scss';
-import { timeTransformation } from '../../../../../../Utils/getTime';
-import { useAddCardMutation } from '../../../../../../Slice/apiSlice';
+import { useAddCard } from './hooks';
 
 const AddCard = () => {
-	const [form] = Form.useForm();
-	const date = timeTransformation(new Date());
-	const userName = sessionStorage.getItem('userName');
-	const [addCard] = useAddCardMutation();
-
-	function onFinish(values: {
-		title: string;
-		description: string;
-		rate: number;
-	}) {
-		if (values.title) {
-			addCard({
-				title: values.title,
-				description: values.description,
-				rate: values.rate,
-				updateAt: date,
-				userName: userName,
-			});
-			form.resetFields();
-		} else {
-			message.error('请输入标题');
-		}
-	}
-	const onCancel = () => {
-		form.resetFields();
-	};
+	const { form, onFinish, onCancel } = useAddCard();
 
 	return (
 		<div className={styles.card}>

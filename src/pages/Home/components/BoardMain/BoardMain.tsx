@@ -1,18 +1,11 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import BoardCard from './Components/BoardCard/BoardCard';
 import './BoardMain.scss';
-import AddCard from './Components/BoardCard/AddCard';
-import { useGetCardQuery } from '../../../../Slice/apiSlice';
+import AddCard from './Components/BoardCard/AddCard/AddCard';
+import { useCardList } from './hooks';
 
 const BoardMain: React.FC = () => {
-	const { data: cardList } = useGetCardQuery();
-	const sortCardList = useMemo(() => {
-		if (cardList) {
-			const sortCards = cardList.slice();
-			sortCards.sort((a, b) => b.updateAt.localeCompare(a.updateAt));
-			return sortCards;
-		}
-	}, [cardList]);
+	const sortCardList = useCardList();
 
 	return (
 		<div className="card-display">
