@@ -7,6 +7,7 @@ const cardSlice = createSlice({
 		editId: '',
 		isDeleteModalOpen: false,
 		deleteId: '',
+		searchValue: '',
 	},
 	reducers: {
 		setIsEdit: (state, action) => {
@@ -21,8 +22,16 @@ const cardSlice = createSlice({
 		setDeleteId: (state, action) => {
 			state.deleteId = action.payload;
 		},
+		setSearchValue: (state, action) => {
+			state.searchValue = action.payload;
+		},
 	},
 });
-export const { setIsEdit, setEditId, setIsDeleteModalOpen, setDeleteId } =
-	cardSlice.actions;
+export const {
+	setIsEdit,
+	setEditId,
+	setIsDeleteModalOpen,
+	setDeleteId,
+	setSearchValue,
+} = cardSlice.actions;
 export default cardSlice;

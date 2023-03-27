@@ -1,13 +1,10 @@
 import React from 'react';
 import Search from 'antd/es/input/Search';
 import './BoardSideRight.scss';
-import { useSearchCardQuery } from '../../../../Slice/apiSlice';
+import { useSideRight } from './hooks';
 
 const BoardSideRight: React.FC = () => {
-	const onSearch = (value: string) => {
-		const { data: cardList } = useSearchCardQuery(value);
-		console.log(cardList);
-	};
+	const onSearch = useSideRight();
 	return (
 		<div>
 			<Search

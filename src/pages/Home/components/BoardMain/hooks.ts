@@ -1,8 +1,10 @@
 import { useMemo } from 'react';
-import { useGetCardQuery } from '../../../../Slice/apiSlice';
+import { useSearchCardQuery } from '../../../../Slice/apiSlice';
+import { useSelector } from 'react-redux';
 
 export const useCardList = () => {
-	const { data: cardList } = useGetCardQuery();
+	const searchValue = useSelector((state: any) => state.editCard.searchValue);
+	const { data: cardList } = useSearchCardQuery(searchValue);
 	return useMemo(() => {
 		if (cardList) {
 			const sortCards = cardList.slice();

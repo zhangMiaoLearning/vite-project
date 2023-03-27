@@ -13,12 +13,6 @@ export const apiSlice = createApi({
 	baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3004' }),
 	tagTypes: ['card'],
 	endpoints: (builder) => ({
-		getCard: builder.query<Card[], void>({
-			query: () => ({
-				url: '/card',
-			}),
-			providesTags: ['card'],
-		}),
 		addCard: builder.mutation<
 			void,
 			{
@@ -83,7 +77,6 @@ export const apiSlice = createApi({
 	}),
 });
 export const {
-	useGetCardQuery,
 	useAddCardMutation,
 	useUpdateCardMutation,
 	useDeleteCardMutation,
