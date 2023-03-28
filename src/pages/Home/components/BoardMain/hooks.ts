@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useSearchCardQuery } from '../../../../Slice/apiSlice';
+import { useSearchCardQuery } from '../../../../Slice/cardApiSlice';
 import { useSelector } from 'react-redux';
 
 export const useCardList = () => {

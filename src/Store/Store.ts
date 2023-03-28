@@ -1,13 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { apiSlice } from '../Slice/apiSlice';
+import { cardApiSlice } from '../Slice/cardApiSlice';
 import cardSlice from '../Slice/cardSlice';
+import homeSlice from '../Slice/homeSlice';
 
 export const store = configureStore({
 	reducer: {
-		[apiSlice.reducerPath]: apiSlice.reducer,
+		[cardApiSlice.reducerPath]: cardApiSlice.reducer,
 		editCard: cardSlice.reducer,
+		home: homeSlice.reducer,
 	},
 	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware().concat(apiSlice.middleware),
+		getDefaultMiddleware().concat(cardApiSlice.middleware),
 	devTools: true,
 });

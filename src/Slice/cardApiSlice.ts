@@ -8,7 +8,7 @@ export interface Card {
 	updateAt: string;
 	userName: string;
 }
-export const apiSlice = createApi({
+export const cardApiSlice = createApi({
 	reducerPath: 'api',
 	baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3004' }),
 	tagTypes: ['card'],
@@ -81,4 +81,4 @@ export const {
 	useUpdateCardMutation,
 	useDeleteCardMutation,
 	useSearchCardQuery,
-} = apiSlice;
+} = cardApiSlice;

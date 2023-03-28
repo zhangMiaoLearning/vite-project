@@ -3,7 +3,7 @@ import { timeTransformation } from '../../../../../../Utils/getTime';
 import {
 	useDeleteCardMutation,
 	useUpdateCardMutation,
-} from '../../../../../../Slice/apiSlice';
+} from '../../../../../../Slice/cardApiSlice';
 import { Form } from 'antd';
 import {
 	setDeleteId,

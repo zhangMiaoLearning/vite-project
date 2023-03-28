@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import BoardSideLeft from './components/BoardSideLeft/boardSideLeft';
+import React from 'react';
+import BoardSideLeft from './components/BoardSideLeft/BoardSideLeft';
 import './Home.scss';
 import BoardMain from './components/BoardMain/BoardMain';
 import BoardSideRight from './components/BoardSideRight/BoardSideRight';
@@ -7,9 +7,10 @@ import { ReduxDemo } from './components/reduxDemo/ReduxDemo';
 
 import BlogList from './components/BlogList/BlogList';
 import Note from './components/Note/Note';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
-	const [selectKey, setSelectKey] = useState('1');
+	const selectKey = useSelector((state: any) => state.home.selectKey);
 	const getMainContent = () => {
 		if (selectKey === '1') {
 			return <BoardMain />;
@@ -28,7 +29,7 @@ const Home = () => {
 
 	return (
 		<div className="main-content">
-			<BoardSideLeft setSelectKey={setSelectKey} />
+			<BoardSideLeft />
 			<section className="main-content-center">{getMainContent()}</section>
 			<BoardSideRight />
 		</div>

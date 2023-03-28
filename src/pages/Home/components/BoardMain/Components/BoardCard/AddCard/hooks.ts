@@ -1,6 +1,6 @@
 import { Form, message } from 'antd';
 import { timeTransformation } from '../../../../../../../Utils/getTime';
-import { useAddCardMutation } from '../../../../../../../Slice/apiSlice';
+import { useAddCardMutation } from '../../../../../../../Slice/cardApiSlice';
 
 export const useAddCard = () => {
 	const [form] = Form.useForm();
