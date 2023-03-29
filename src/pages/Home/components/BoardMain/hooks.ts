@@ -16,7 +16,6 @@ export const useCardList = () => {
 		return orderBy(state.card.cardList, ['updateAt'], ['desc']);
 	});
 	const onQuery = (value: string) => {
-		console.log('onQuery:', value);
 		dispatch(updateQuery(value));
 	};
 
