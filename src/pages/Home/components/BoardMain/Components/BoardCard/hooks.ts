@@ -6,10 +6,10 @@ import {
 } from '../../../../../../Slice/cardApiSlice';
 import { Form } from 'antd';
 import {
-	setDeleteId,
-	setEditId,
-	setIsDeleteModalOpen,
-	setIsEdit,
+	activeDelete,
+	activeUpdate,
+	confirmDelete,
+	confirmUpdate,
 } from '../../../../../../Slice/cardSlice';
 interface BoardCardProps {
 	id: string;
@@ -20,21 +20,18 @@ interface BoardCardProps {
 	userName?: string | null;
 }
 export const useCardAction = (props: BoardCardProps) => {
-	const isEdit = useSelector((state: any) => state.editCard.isEdit);
-	const editId = useSelector((state: any) => state.editCard.editId);
+	const editId = useSelector((state: any) => state.card.editing.id);
 	const isDeleteModalOpen = useSelector(
-		(state: any) => state.editCard.isDeleteModalOpen
+		(state: any) => state.card.isDeleteModalOpen
 	);
-	const deleteId = useSelector((state: any) => state.editCard.deleteId);
+	const deleteId = useSelector((state: any) => state.card.deleting.id);
 	const dispatch = useDispatch();
-	const onCloseEdit = () => dispatch(setIsEdit(false));
+	const onCloseEdit = () => dispatch(activeUpdate(''));
 	const onOpenEdit = () => {
-		dispatch(setIsEdit(true));
-		dispatch(setEditId(props.id));
+		dispatch(activeUpdate(props.id));
 	};
 	const onOpenDeleteModal = (newOpen: boolean) => {
-		dispatch(setIsDeleteModalOpen(newOpen));
-		dispatch(setDeleteId(props.id));
+		dispatch(activeDelete({ id: props.id, isDeleteModalOpen: newOpen }));
 	};
 
 	const date = timeTransformation(new Date());
@@ -44,12 +41,12 @@ export const useCardAction = (props: BoardCardProps) => {
 	const [updateCard] = useUpdateCardMutation();
 	const [deleteCard] = useDeleteCardMutation();
 
-	function onFinish(values: {
+	async function onFinish(values: {
 		title: string;
 		description: string;
 		rate: number;
 	}) {
-		updateCard({
+		const x = await updateCard({
 			id: props.id,
 			title: values.title,
 			description: values.description,
@@ -57,16 +54,29 @@ export const useCardAction = (props: BoardCardProps) => {
 			updateAt: date,
 			userName: currentUserName,
 		});
-		dispatch(setIsEdit(false));
+		console.log(x);
+		if (date) {
+			dispatch(
+				confirmUpdate({
+					id: props.id,
+					title: values.title,
+					description: values.description,
+					rate: values.rate,
+					updateAt: date,
+					userName: currentUserName,
+				})
+			);
+		}
+		dispatch(activeUpdate(''));
 	}
 
 	function handleDelete() {
+		dispatch(confirmDelete(deleteId));
 		deleteCard(deleteId);
-		dispatch(setIsDeleteModalOpen(false));
+		dispatch(activeDelete({ id: deleteId, isDeleteModalOpen: false }));
 	}
 
 	return {
-		isEdit,
 		editId,
 		isDeleteModalOpen,
 		dispatch,

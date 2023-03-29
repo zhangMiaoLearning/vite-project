@@ -18,7 +18,6 @@ interface BoardCardProps {
 
 const BoardCard: React.FC<BoardCardProps> = (props) => {
 	const {
-		isEdit,
 		editId,
 		onCloseEdit,
 		onOpenEdit,
@@ -39,7 +38,7 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 								initialValue={props.title}
 								style={{ margin: 0 }}
 							>
-								{editId == props.id && isEdit ? <Input /> : `${props.title}`}
+								{editId == props.id ? <Input /> : `${props.title}`}
 							</Form.Item>
 							<section className={styles.user}>
 								<Avatar className={styles.userColor}>{props.userName}</Avatar>
@@ -49,7 +48,7 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 					}
 					actions={
 						currentUserName === props.userName
-							? editId === props.id && isEdit
+							? editId === props.id
 								? [
 										<Form.Item key={'save-button'} style={{ margin: 0 }}>
 											<Button type="primary" htmlType="submit">
@@ -73,7 +72,7 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 					<Meta
 						description={
 							<Form.Item name={'description'} initialValue={props.description}>
-								{editId == props.id && isEdit ? (
+								{editId == props.id ? (
 									<TextArea
 										placeholder={`请输入卡片内容`}
 										showCount
@@ -90,7 +89,7 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 						initialValue={props.rate}
 						style={{ margin: 0 }}
 					>
-						<Rate disabled={!isEdit} />
+						<Rate disabled={!(editId === props.id)} />
 					</Form.Item>
 				</Card>
 			</Form>

@@ -8,12 +8,14 @@ import { ReduxDemo } from './components/reduxDemo/ReduxDemo';
 import BlogList from './components/BlogList/BlogList';
 import Note from './components/Note/Note';
 import { useSelector } from 'react-redux';
+import { useCardList } from './components/BoardMain/hooks';
 
 const Home = () => {
 	const selectKey = useSelector((state: any) => state.home.selectKey);
+	const { onQuery, list } = useCardList();
 	const getMainContent = () => {
 		if (selectKey === '1') {
-			return <BoardMain />;
+			return <BoardMain list={list} />;
 		}
 		if (selectKey === '2') {
 			return <ReduxDemo />;
@@ -31,7 +33,7 @@ const Home = () => {
 		<div className="main-content">
 			<BoardSideLeft />
 			<section className="main-content-center">{getMainContent()}</section>
-			<BoardSideRight />
+			<BoardSideRight onQuery={onQuery} />
 		</div>
 	);
 };

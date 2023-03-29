@@ -5,6 +5,10 @@ const homeSlice = createSlice({
 	initialState: {
 		selectKey: '1',
 		currentPath: '/',
+		userInformation: {
+			username: '',
+			password: '',
+		},
 	},
 	reducers: {
 		setSelectKey: (state, action) => {
@@ -13,7 +17,11 @@ const homeSlice = createSlice({
 		setCurrentPath: (state, action) => {
 			state.currentPath = action.payload;
 		},
+		setUserInformation: (state, action) => {
+			state.userInformation = action.payload;
+		},
 	},
 });
-export const { setSelectKey, setCurrentPath } = homeSlice.actions;
+export const { setSelectKey, setCurrentPath, setUserInformation } =
+	homeSlice.actions;
 export default homeSlice;

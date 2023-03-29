@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { initCardList } from './cardSlice';
 
 export interface Card {
 	id: string;
@@ -6,7 +7,7 @@ export interface Card {
 	description: string;
 	rate: number;
 	updateAt: string;
-	userName: string;
+	userName: string | null;
 }
 export const cardApiSlice = createApi({
 	reducerPath: 'api',
@@ -73,6 +74,10 @@ export const cardApiSlice = createApi({
 				url: `/card?title_like=${value}`,
 			}),
 			providesTags: ['card'],
+			async onQueryStarted(arg, api) {
+				const { data } = await api.queryFulfilled;
+				api.dispatch(initCardList(data));
+			},
 		}),
 	}),
 });

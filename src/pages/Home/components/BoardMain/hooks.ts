@@ -1,15 +1,27 @@
-import { useMemo } from 'react';
+import { orderBy } from 'lodash';
 import { useSearchCardQuery } from '../../../../Slice/cardApiSlice';
-import { useSelector } from 'react-redux';
+import { useStoreDispatch, useStoreSelector } from '../../../../Store/Store';
+import { updateQuery } from '../../../../Slice/cardSlice';
 
 export const useCardList = () => {
-	const searchValue = useSelector((state: any) => state.editCard.searchValue);
-	const { data: cardList } = useSearchCardQuery(searchValue);
-	return useMemo(() => {
-		if (cardList) {
-			const sortCards = cardList.slice();
-			sortCards.sort((a, b) => b.updateAt.localeCompare(a.updateAt));
-			return sortCards;
-		}
-	}, [cardList]);
+	const dispatch = useStoreDispatch();
+	const searchValue = useStoreSelector(
+		(state) => state.card.query.keyword || ''
+	);
+	useSearchCardQuery(searchValue, {
+		skip: false,
+		refetchOnMountOrArgChange: true,
+	});
+	const list = useStoreSelector((state) => {
+		return orderBy(state.card.cardList, ['updateAt'], ['desc']);
+	});
+	const onQuery = (value: string) => {
+		console.log('onQuery:', value);
+		dispatch(updateQuery(value));
+	};
+
+	return {
+		list,
+		onQuery,
+	};
 };

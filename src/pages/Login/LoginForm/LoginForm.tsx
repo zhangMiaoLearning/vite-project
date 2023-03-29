@@ -1,21 +1,24 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button, Form, Input, Modal } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { LoginApi } from '../../../Api/LoginApi';
 import { useNavigate } from 'react-router-dom';
-import { GlobalContext } from '../../../Utils/Store/GlobalProvider';
 import './LoginForm.scss';
+import { useLoginQuery } from '../../../Slice/loginApiSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserInformation } from '../../../Slice/homeSlice';
 
 const LoginForm = () => {
-	const { setCurrentUserInfo } = useContext(GlobalContext);
 	const navigate = useNavigate();
-
+	const dispatch = useDispatch();
+	const userInformation = useSelector(
+		(state: any) => state.home.userInformation
+	);
+	const { data: user } = useLoginQuery(userInformation);
 	async function onFinish(values: { username: string; password: string }) {
-		const result = await LoginApi(values).then();
-		if (result) {
+		dispatch(setUserInformation(values));
+		if (user) {
 			navigate('/home');
-			setCurrentUserInfo({ id: result.id, username: result.username });
-			sessionStorage.setItem('userName', result.username);
+			sessionStorage.setItem('userName', values.username);
 		}
 	}
 
