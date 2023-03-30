@@ -10,15 +10,22 @@ import { Provider } from 'react-redux';
 import { store } from './Store/Store';
 import Mouse from './pages/Components/MouseTracker/Mouse';
 import Heart from './pages/Components/MouseTracker/Heart';
+import { useHeader } from './pages/Components/Header/hooks';
+import { items } from './pages/Components/Header/HeaderMenu';
 
 function App() {
+	const { userName, showHeader } = useHeader();
 	return (
 		<Provider store={store}>
 			<Mouse render={(mouse) => <Heart mouse={mouse} />}>
 				<GlobalProvider>
 					<BrowserRouter>
 						<Suspense fallback={<LazyModule />}>
-							<Header />
+							<Header
+								userName={userName}
+								showHeader={showHeader}
+								items={items}
+							/>
 							<Routes>
 								{ROUTES.map((route) => (
 									<Route
