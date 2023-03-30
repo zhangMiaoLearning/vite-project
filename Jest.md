@@ -51,5 +51,38 @@ testEnvironment: "node",
 - 修改  
 将它改成json文件。
 
+## 错误  
+testEnvironment  
+
+1. The moduleNameMapper can be used to map a module path to a different module.  
+By default the preset maps all images to an image stub module but if a module cannot be found this configuration option can help:
+```
+{
+	"preset": "ts-jest",
+	"testEnvironment": "jsdom",
+	"transform": {
+		"^.+\\.js$": "babel-jest",
+		"^.+\\.(ts|tsx)$": "ts-jest"
+	},
+	"moduleNameMapper": {
+		"\\.(css|scss)$": "identity-obj-proxy",
+		"^antd/es/(.*)$": "<rootDir>/node_modules/antd/lib/$1",
+		"^rc-util/es/(.*)$": "<rootDir>/node_modules/@ant-design/pro-layout/node_modules/rc-util/lib/$1"
+	}
+}
+```  
+```
+yarn add jest-environment-jsdom
+
+```  
+```  
+yarn add jsdom
+```
+
+``` 
+yarn add identity-obj-proxy 
+```
+
+
 
 
