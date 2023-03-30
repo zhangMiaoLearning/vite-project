@@ -63,7 +63,6 @@ const cardSlice = createSlice<CardState, CardReducer, typeof CardReducerName>({
 			state.editing.id = action.payload;
 		},
 		confirmUpdate: (state, action) => {
-			console.log('update');
 			state.cardList.map((card) => {
 				return card.id === action.payload.id ? action.payload : card;
 			});
