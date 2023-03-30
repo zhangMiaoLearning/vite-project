@@ -1,21 +1,18 @@
 import React from 'react';
 import './Header.scss';
 import { Avatar, Breadcrumb } from 'antd';
-
-interface HeaderProps {
-	userName: string | null;
-	showHeader: boolean;
-	items: { title: JSX.Element }[];
-}
-const Header: React.FC<HeaderProps> = (props) => {
+import { useHeader } from './hooks';
+import { items } from './HeaderMenu';
+const Header: React.FC = () => {
+	const { userName, showHeader } = useHeader();
 	return (
 		<div className="header">
 			<section className="header-title">demo</section>
-			{props.showHeader ? null : (
+			{showHeader ? null : (
 				<>
-					<Breadcrumb className="header-menu" items={props.items} />
+					<Breadcrumb className="header-menu" items={items} />
 					<section className="header-user">
-						<Avatar>{props.userName}</Avatar>
+						<Avatar>{userName}</Avatar>
 					</section>
 				</>
 			)}
