@@ -18,13 +18,15 @@ interface BoardCardProps {
 
 const BoardCard: React.FC<BoardCardProps> = (props) => {
 	const {
-		editId,
+		isEdit,
+		isUser,
 		onCloseEdit,
 		onOpenEdit,
 		onOpenDeleteModal,
 		form,
-		currentUserName,
 		onFinish,
+		isDeleteModalOpen,
+		handleDelete,
 	} = useCardAction(props);
 
 	return (
@@ -38,7 +40,7 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 								initialValue={props.title}
 								style={{ margin: 0 }}
 							>
-								{editId == props.id ? <Input /> : `${props.title}`}
+								{isEdit ? <Input /> : `${props.title}`}
 							</Form.Item>
 							<section className={styles.user}>
 								<Avatar className={styles.userColor}>{props.userName}</Avatar>
@@ -47,8 +49,8 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 						</div>
 					}
 					actions={
-						currentUserName === props.userName
-							? editId === props.id
+						isUser
+							? isEdit
 								? [
 										<Form.Item key={'save-button'} style={{ margin: 0 }}>
 											<Button type="primary" htmlType="submit">
@@ -72,7 +74,7 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 					<Meta
 						description={
 							<Form.Item name={'description'} initialValue={props.description}>
-								{editId == props.id ? (
+								{isEdit ? (
 									<TextArea
 										placeholder={`请输入卡片内容`}
 										showCount
@@ -89,11 +91,15 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 						initialValue={props.rate}
 						style={{ margin: 0 }}
 					>
-						<Rate disabled={!(editId === props.id)} />
+						<Rate disabled={!isEdit} />
 					</Form.Item>
 				</Card>
 			</Form>
-			<DeleteCardModal id={props.id} />
+			<DeleteCardModal
+				isDeleteModalOpen={isDeleteModalOpen}
+				handleDelete={handleDelete}
+				onOpenDeleteModal={onOpenDeleteModal}
+			/>
 		</div>
 	);
 };

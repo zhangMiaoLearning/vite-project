@@ -1,4 +1,3 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { timeTransformation } from '../../../../../../Utils/getTime';
 import {
 	useDeleteCardMutation,
@@ -11,6 +10,10 @@ import {
 	confirmDelete,
 	confirmUpdate,
 } from '../../../../../../Slice/cardSlice';
+import {
+	useStoreDispatch,
+	useStoreSelector,
+} from '../../../../../../Store/Store';
 interface BoardCardProps {
 	id: string;
 	title?: string;
@@ -20,26 +23,29 @@ interface BoardCardProps {
 	userName?: string | null;
 }
 export const useCardAction = (props: BoardCardProps) => {
-	const editId = useSelector((state: any) => state.card.editing.id);
-	const isDeleteModalOpen = useSelector(
-		(state: any) => state.card.isDeleteModalOpen
-	);
-	const deleteId = useSelector((state: any) => state.card.deleting.id);
-	const dispatch = useDispatch();
-	const onCloseEdit = () => dispatch(activeUpdate(''));
-	const onOpenEdit = () => {
-		dispatch(activeUpdate(props.id));
-	};
+	const dispatch = useStoreDispatch();
+
 	const onOpenDeleteModal = (newOpen: boolean) => {
 		dispatch(activeDelete({ id: props.id, isDeleteModalOpen: newOpen }));
 	};
+	const isDeleteModalOpen = useStoreSelector(
+		(state) => state.card.isDeleteModalOpen
+	);
+	const deleteId = useStoreSelector((state) => state.card.deleting.id);
+	const [deleteCard] = useDeleteCardMutation();
+
+	const onOpenEdit = () => {
+		dispatch(activeUpdate(props.id));
+	};
+	const currentUserName = sessionStorage.getItem('userName');
+	const editId = useStoreSelector((state) => state.card.editing.id);
+	const isEdit = editId === props.id;
+	const isUser = props.userName === currentUserName;
+	const onCloseEdit = () => dispatch(activeUpdate(''));
 
 	const date = timeTransformation(new Date());
 	const [form] = Form.useForm();
-
-	const currentUserName = sessionStorage.getItem('userName');
 	const [updateCard] = useUpdateCardMutation();
-	const [deleteCard] = useDeleteCardMutation();
 
 	async function onFinish(values: {
 		title: string;
@@ -77,7 +83,8 @@ export const useCardAction = (props: BoardCardProps) => {
 	}
 
 	return {
-		editId,
+		isEdit,
+		isUser,
 		isDeleteModalOpen,
 		dispatch,
 		onCloseEdit,
