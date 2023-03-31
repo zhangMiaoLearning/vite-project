@@ -1,13 +1,15 @@
 import React from 'react';
-import { Avatar, Button, Card, Form, Input, Rate } from 'antd';
-import Meta from 'antd/es/card/Meta';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import TextArea from 'antd/es/input/TextArea';
+import { Avatar, Card, Form } from 'antd';
 import styles from './BoardCard.module.scss';
 import { useCardAction } from './hooks';
 import DeleteCardModal from './DeleteCardModal/DeleteCardModal';
+import { CardTitle } from './CardTitle/CardTitle';
+import { CardEditActions } from './CardEditAction/CardEditAction';
+import { CardAction } from './CardAction/CardAction';
+import { CardRate } from './CardRate/CardRate';
+import { CardDescription } from './CardDescription/CardDescription';
 
-interface BoardCardProps {
+export interface BoardCardProps {
 	id: string;
 	title: string;
 	description: string;
@@ -35,13 +37,7 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 				<Card
 					title={
 						<div className={styles.title}>
-							<Form.Item
-								name={'title'}
-								initialValue={props.title}
-								style={{ margin: 0 }}
-							>
-								{isEdit ? <Input /> : `${props.title}`}
-							</Form.Item>
+							<CardTitle isEdit={isEdit} title={props.title} />
 							<section className={styles.user}>
 								<Avatar className={styles.userColor}>{props.userName}</Avatar>
 								<div className={styles.updateTime}>{props.updateAt}</div>
@@ -52,47 +48,24 @@ const BoardCard: React.FC<BoardCardProps> = (props) => {
 						isUser
 							? isEdit
 								? [
-										<Form.Item key={'save-button'} style={{ margin: 0 }}>
-											<Button type="primary" htmlType="submit">
-												保存
-											</Button>
-										</Form.Item>,
-										<Form.Item key={'cancel-button'} style={{ margin: 0 }}>
-											<Button onClick={onCloseEdit}>取消</Button>
-										</Form.Item>,
+										<CardEditActions
+											key={props.id}
+											onCloseEdit={onCloseEdit}
+											okText={'保存'}
+										/>,
 								  ]
 								: [
-										<EditOutlined key="edit" onClick={onOpenEdit} />,
-										<DeleteOutlined
-											key={'delete-button'}
-											onClick={() => onOpenDeleteModal(true)}
+										<CardAction
+											key={props.id}
+											onOpenEdit={onOpenEdit}
+											onOpenDeleteModal={onOpenDeleteModal}
 										/>,
 								  ]
 							: []
 					}
 				>
-					<Meta
-						description={
-							<Form.Item name={'description'} initialValue={props.description}>
-								{isEdit ? (
-									<TextArea
-										placeholder={`请输入卡片内容`}
-										showCount
-										maxLength={100}
-									/>
-								) : (
-									props.description
-								)}
-							</Form.Item>
-						}
-					/>
-					<Form.Item
-						name={'rate'}
-						initialValue={props.rate}
-						style={{ margin: 0 }}
-					>
-						<Rate disabled={!isEdit} />
-					</Form.Item>
+					<CardDescription isEdit={isEdit} description={props.description} />
+					<CardRate isEdit={isEdit} rate={props.rate} />
 				</Card>
 			</Form>
 			<DeleteCardModal

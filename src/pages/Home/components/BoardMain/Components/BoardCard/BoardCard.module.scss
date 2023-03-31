@@ -1,20 +1,28 @@
 .card {
   margin: 20px;
 }
+
 .title {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .updateTime {
   font-weight: normal;
   font-size: small;
 }
+
 .user {
   display: flex;
   align-items: center;
   gap: 20px;
+
   .userColor {
     background-color: #8076a6;
   }
+}
+.cardAction {
+  display: flex;
+  justify-content: space-around;
 }

@@ -1,48 +1,37 @@
 import React from 'react';
-import { Button, Card, Form, Input, Rate } from 'antd';
-import TextArea from 'antd/es/input/TextArea';
-import Meta from 'antd/es/card/Meta';
+import { Card, Form, FormInstance } from 'antd';
 import styles from './AddCard.module.scss';
-import { useAddCard } from './hooks';
+import { CardRate } from '../CardRate/CardRate';
+import { CardDescription } from '../CardDescription/CardDescription';
+import { CardEditActions } from '../CardEditAction/CardEditAction';
+import { CardTitle } from '../CardTitle/CardTitle';
 
-const AddCard = () => {
-	const { form, onFinish, onCancel } = useAddCard();
-
+interface AddCardProps {
+	form: FormInstance;
+	onFinish: (values: {
+		title: string;
+		description: string;
+		rate: number;
+	}) => void;
+	onCancel: () => void;
+}
+const AddCard: React.FC<AddCardProps> = (props) => {
 	return (
 		<div className={styles.card}>
 			<div className={styles.title}>新增一条说说</div>
-			<Form form={form} onFinish={onFinish}>
+			<Form form={props.form} onFinish={props.onFinish}>
 				<Card
-					title={
-						<Form.Item name={'title'} style={{ margin: 0 }}>
-							<Input placeholder={`请输入标题`} />
-						</Form.Item>
-					}
+					title={<CardTitle isEdit={true} placeholder={'请输入卡片标题'} />}
 					actions={[
-						<Form.Item key={'save-button'} style={{ margin: 0 }}>
-							<Button type="primary" htmlType="submit">
-								添加
-							</Button>
-						</Form.Item>,
-						<Form.Item key={'cancel-button'} style={{ margin: 0 }}>
-							<Button onClick={onCancel}>取消</Button>
-						</Form.Item>,
+						<CardEditActions
+							key={'cardEdit'}
+							okText={'添加'}
+							onCancel={props.onCancel}
+						/>,
 					]}
 				>
-					<Meta
-						description={
-							<Form.Item name={'description'}>
-								<TextArea
-									placeholder={`请输入卡片内容`}
-									showCount
-									maxLength={100}
-								/>
-							</Form.Item>
-						}
-					/>
-					<Form.Item name={'rate'} style={{ margin: 0 }}>
-						<Rate />
-					</Form.Item>
+					<CardDescription isEdit={true} />
+					<CardRate isEdit={true} />
 				</Card>
 			</Form>
 		</div>
