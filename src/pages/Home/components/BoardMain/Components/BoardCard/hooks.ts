@@ -83,6 +83,7 @@ export const useCardAction = (props: BoardCardProps) => {
 	}
 
 	return {
+		deleteId,
 		isEdit,
 		isUser,
 		isDeleteModalOpen,
