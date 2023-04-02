@@ -79,11 +79,12 @@ export const useCardAction = (props: BoardCardProps) => {
 	function handleDelete() {
 		dispatch(confirmDelete(deleteId));
 		deleteCard(deleteId);
-		dispatch(activeDelete({ id: deleteId, isDeleteModalOpen: false }));
+		dispatch(activeDelete({ id: '', isDeleteModalOpen: false }));
 	}
 
 	return {
 		deleteId,
+		editId,
 		isEdit,
 		isUser,
 		isDeleteModalOpen,

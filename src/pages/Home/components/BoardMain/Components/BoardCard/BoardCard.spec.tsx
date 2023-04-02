@@ -40,4 +40,19 @@ describe('BoardCard', function () {
 			result.current.handleDelete();});
 		expect(result.current.isDeleteModalOpen).toEqual(false);
 	});
+
+	it('should onOpenEdit', function() {
+		const {result}=renderHook(()=>useCardAction(mockBoardCardProps),{wrapper:StoreWrapper});
+		act(()=>{result.current.onOpenEdit();});
+		expect(result.current.isEdit).toEqual(true);
+		expect(result.current.editId).toEqual('1');
+	});
+
+	it('should onCloseEdit', function() {
+		const {result}=renderHook(()=>useCardAction(mockBoardCardProps),{wrapper:StoreWrapper});
+		act(()=>{result.current.onCloseEdit();});
+		expect(result.current.isEdit).toEqual(false);
+		expect(result.current.editId).toEqual('');
+	});
+
 });
