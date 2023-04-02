@@ -7,7 +7,7 @@ import { CardEditActions } from '../CardEditAction/CardEditAction';
 import { CardTitle } from '../CardTitle/CardTitle';
 
 interface AddCardProps {
-	form: FormInstance;
+	form?: FormInstance;
 	onFinish: (values: {
 		title: string;
 		description: string;
