@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { initCardList } from './cardSlice';
+import 'whatwg-fetch';
 
 export interface Card {
 	id: string;
