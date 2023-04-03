@@ -1,27 +1,52 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {
+	CaseReducer,
+	createSlice,
+	PayloadAction,
+	SliceCaseReducers,
+} from '@reduxjs/toolkit';
 
-const homeSlice = createSlice({
-	name: 'home',
+export const HomeReducerName = 'home';
+
+interface HomeState {
+	menuOption: string;
+	userInformation: {
+		username: string;
+		password: string;
+	};
+	currentPath: string;
+}
+
+interface HomeReducer extends SliceCaseReducers<HomeState> {
+	confirmMenuOption: CaseReducer<HomeState, PayloadAction<string>>;
+	saveUserInformation: CaseReducer<
+		HomeState,
+		PayloadAction<{ username: string; password: string }>
+	>;
+	saveCurrentPath: CaseReducer<HomeState, PayloadAction<string>>;
+}
+
+const homeSlice = createSlice<HomeState, HomeReducer, typeof HomeReducerName>({
+	name: HomeReducerName,
 	initialState: {
-		selectKey: '1',
-		currentPath: '/',
+		menuOption: '1',
 		userInformation: {
 			username: '',
 			password: '',
 		},
+		currentPath: '/',
 	},
 	reducers: {
-		setSelectKey: (state, action) => {
-			state.selectKey = action.payload;
+		confirmMenuOption: (state, action) => {
+			state.menuOption = action.payload;
 		},
-		setCurrentPath: (state, action) => {
-			state.currentPath = action.payload;
-		},
-		setUserInformation: (state, action) => {
+		saveUserInformation: (state, action) => {
 			state.userInformation = action.payload;
+		},
+		saveCurrentPath: (state, action) => {
+			state.currentPath = action.payload;
 		},
 	},
 });
-export const { setSelectKey, setCurrentPath, setUserInformation } =
+export const { confirmMenuOption, saveUserInformation, saveCurrentPath } =
 	homeSlice.actions;
 export default homeSlice;

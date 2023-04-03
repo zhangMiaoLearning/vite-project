@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { cardApiSlice } from '../Slice/cardApiSlice';
 import cardSlice, { CardReducerName } from '../Slice/cardSlice';
-import homeSlice from '../Slice/homeSlice';
+import homeSlice, { HomeReducerName } from '../Slice/homeSlice';
 import { loginApiSlice } from '../Slice/loginApiSlice';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
@@ -10,7 +10,7 @@ export const store = configureStore({
 		[cardApiSlice.reducerPath]: cardApiSlice.reducer,
 		[loginApiSlice.reducerPath]: loginApiSlice.reducer,
 		[CardReducerName]: cardSlice.reducer,
-		home: homeSlice.reducer,
+		[HomeReducerName]:homeSlice.reducer
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(

@@ -11,19 +11,19 @@ import { useCardList } from './components/BoardMain/hooks/hooks';
 import { useStoreSelector } from '../../Store/Store';
 
 const Home = () => {
-	const selectKey = useStoreSelector((state) => state.home.selectKey);
+	const menuOption = useStoreSelector((state) => state.home.menuOption);
 	const { onQuery, list } = useCardList();
 	const getMainContent = () => {
-		if (selectKey === '1') {
+		if (menuOption === '1') {
 			return <BoardMain list={list} />;
 		}
-		if (selectKey === '2') {
+		if (menuOption === '2') {
 			return <ReduxDemo />;
 		}
-		if (selectKey === '3') {
+		if (menuOption === '3') {
 			return <BlogList />;
 		}
-		if (selectKey === '4') {
+		if (menuOption === '4') {
 			return <Note />;
 		}
 		return null;

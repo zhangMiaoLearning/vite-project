@@ -14,10 +14,7 @@ const Note = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [okText, setOkText] = useState('');
 	const [text, setText] = useState('');
-	const [formValues, setFormValues] = useState<Note>({
-		title: 'null',
-		content: null,
-	});
+	const [formValues, setFormValues] = useState<Note>({} as Note);
 	const currentUserName = sessionStorage.getItem('userName');
 	function handleAdd(values: { title: string; content: HTMLInputElement }) {
 		setIsModalOpen(true);

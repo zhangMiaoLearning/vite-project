@@ -4,18 +4,18 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import './LoginForm.scss';
 import { useLoginQuery } from '../../../Slice/loginApiSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { setUserInformation } from '../../../Slice/homeSlice';
+import { saveUserInformation } from '../../../Slice/homeSlice';
+import { useStoreDispatch, useStoreSelector } from '../../../Store/Store';
 
 const LoginForm = () => {
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
-	const userInformation = useSelector(
-		(state: any) => state.home.userInformation
+	const dispatch = useStoreDispatch();
+	const userInformation = useStoreSelector(
+		(state) => state.home.userInformation
 	);
 	const { data: user } = useLoginQuery(userInformation);
 	async function onFinish(values: { username: string; password: string }) {
-		dispatch(setUserInformation(values));
+		dispatch(saveUserInformation(values));
 		if (user) {
 			navigate('/home');
 			sessionStorage.setItem('userName', values.username);

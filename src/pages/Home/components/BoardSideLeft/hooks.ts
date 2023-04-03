@@ -1,11 +1,11 @@
 import { MenuProps } from 'antd';
-import { setSelectKey } from '../../../../Slice/homeSlice';
-import { useDispatch } from 'react-redux';
+import { confirmMenuOption } from '../../../../Slice/homeSlice';
+import { useStoreDispatch } from '../../../../Store/Store';
 
 export const useBoardSideLeft = () => {
-	const dispatch = useDispatch();
+	const dispatch = useStoreDispatch();
 	const onClick: MenuProps['onClick'] = (e) => {
-		dispatch(setSelectKey(e.key));
+		dispatch(confirmMenuOption(e.key));
 	};
 	return onClick;
 };
