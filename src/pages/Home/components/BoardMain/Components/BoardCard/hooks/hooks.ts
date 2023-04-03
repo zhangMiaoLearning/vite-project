@@ -1,19 +1,19 @@
-import { timeTransformation } from '../../../../../../Utils/getTime';
+import { timeTransformation } from '../../../../../../../Utils/getTime';
 import {
 	useDeleteCardMutation,
 	useUpdateCardMutation,
-} from '../../../../../../Slice/cardApiSlice';
+} from '../../../../../../../Slice/cardApiSlice';
 import { Form } from 'antd';
 import {
 	activeDelete,
 	activeUpdate,
 	confirmDelete,
 	confirmUpdate,
-} from '../../../../../../Slice/cardSlice';
+} from '../../../../../../../Slice/cardSlice';
 import {
 	useStoreDispatch,
 	useStoreSelector,
-} from '../../../../../../Store/Store';
+} from '../../../../../../../Store/Store';
 interface BoardCardProps {
 	id: string;
 	title?: string;

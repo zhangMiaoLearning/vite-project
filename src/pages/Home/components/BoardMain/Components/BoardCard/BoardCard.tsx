@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, Card, Form } from 'antd';
 import styles from './BoardCard.module.scss';
-import { useCardAction } from './hooks';
+import { useCardAction } from './hooks/hooks';
 import DeleteCardModal from './DeleteCardModal/DeleteCardModal';
 import { CardTitle } from './CardTitle/CardTitle';
 import { CardEditActions } from './CardEditAction/CardEditAction';
