@@ -1,7 +1,7 @@
 import { orderBy } from 'lodash';
-import { useSearchCardQuery } from '../../../../Slice/cardApiSlice';
-import { useStoreDispatch, useStoreSelector } from '../../../../Store/Store';
-import { updateQuery } from '../../../../Slice/cardSlice';
+import { useSearchCardQuery } from '../../../../../Slice/cardApiSlice';
+import { useStoreDispatch, useStoreSelector } from '../../../../../Store/Store';
+import { updateQuery } from '../../../../../Slice/cardSlice';
 
 export const useCardList = () => {
 	const dispatch = useStoreDispatch();

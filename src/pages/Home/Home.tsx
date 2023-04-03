@@ -7,11 +7,11 @@ import { ReduxDemo } from './components/reduxDemo/ReduxDemo';
 
 import BlogList from './components/BlogList/BlogList';
 import Note from './components/Note/Note';
-import { useSelector } from 'react-redux';
-import { useCardList } from './components/BoardMain/hooks';
+import { useCardList } from './components/BoardMain/hooks/hooks';
+import { useStoreSelector } from '../../Store/Store';
 
 const Home = () => {
-	const selectKey = useSelector((state: any) => state.home.selectKey);
+	const selectKey = useStoreSelector((state) => state.home.selectKey);
 	const { onQuery, list } = useCardList();
 	const getMainContent = () => {
 		if (selectKey === '1') {

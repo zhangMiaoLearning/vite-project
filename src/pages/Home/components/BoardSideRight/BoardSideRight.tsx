@@ -1,7 +1,7 @@
 import React from 'react';
 import Search from 'antd/es/input/Search';
 import './BoardSideRight.scss';
-import { useCardList } from '../BoardMain/hooks';
+import { useCardList } from '../BoardMain/hooks/hooks';
 
 const BoardSideRight: React.FC<{ onQuery: (key: string) => void }> = () => {
 	const { onQuery } = useCardList();
