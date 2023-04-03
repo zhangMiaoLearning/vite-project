@@ -1,42 +1,20 @@
 import React from 'react';
-import { Button, Form, Input, Modal } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
 import './LoginForm.scss';
-import { useLoginQuery } from '../../../Slice/loginApiSlice';
-import { saveUserInformation } from '../../../Slice/homeSlice';
-import { useStoreDispatch, useStoreSelector } from '../../../Store/Store';
-
-const LoginForm = () => {
-	const navigate = useNavigate();
-	const dispatch = useStoreDispatch();
-	const userInformation = useStoreSelector(
-		(state) => state.home.userInformation
-	);
-	const { data: user } = useLoginQuery(userInformation);
-	async function onFinish(values: { username: string; password: string }) {
-		dispatch(saveUserInformation(values));
-		if (user) {
-			navigate('/home');
-			sessionStorage.setItem('userName', values.username);
-		}
-	}
-
-	function onFinishFailed() {
-		Modal.error({
-			title: '提示',
-			content: '请正确填写登录信息',
-		});
-	}
-
+interface LoginFormProps {
+	onFinish: (values: { username: string; password: string }) => void;
+	onFinishFailed: () => void;
+}
+const LoginForm: React.FC<LoginFormProps> = (props) => {
 	return (
 		<div className="login-form-page">
 			<p className="login-form-title">登 录</p>
 			<div className="login-form">
 				<Form
 					name="basic"
-					onFinish={onFinish}
-					onFinishFailed={onFinishFailed}
+					onFinish={props.onFinish}
+					onFinishFailed={props.onFinishFailed}
 					autoComplete="off"
 					className="login-form"
 				>
