@@ -26,14 +26,14 @@ describe('BoardCard', function () {
 		expect(container).toBeInTheDocument();
 	});
 
-	it('should onOpenDeleteModal', function() {
+	it('should active delete modal when onOpenDeleteModal', function() {
 		const {result}=renderHook(()=>useCardAction(mockBoardCardProps),{wrapper:StoreWrapper});
 		act(()=>{result.current.onOpenDeleteModal(true);});
 		expect(result.current.isDeleteModalOpen).toEqual(true);
 		expect(result.current.deleteId).toEqual('1');
 	});
 
-	it('should handleDelete', function() {
+	it('should close delete modal when handleDelete', function() {
 		const {result}=renderHook(()=>useCardAction(mockBoardCardProps),{wrapper:StoreWrapper});
 		act(()=>{
 			result.current.onOpenDeleteModal(true);
