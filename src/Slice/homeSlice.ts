@@ -14,6 +14,7 @@ interface HomeState {
 		password: string;
 	};
 	currentPath: string;
+	confirmPassword: string;
 }
 
 interface HomeReducer extends SliceCaseReducers<HomeState> {
@@ -23,6 +24,9 @@ interface HomeReducer extends SliceCaseReducers<HomeState> {
 		PayloadAction<{ username: string; password: string }>
 	>;
 	saveCurrentPath: CaseReducer<HomeState, PayloadAction<string>>;
+	saveUserName: CaseReducer<HomeState, PayloadAction<string>>;
+	savePassWord: CaseReducer<HomeState, PayloadAction<string>>;
+	confirmPassword: CaseReducer<HomeState, PayloadAction<string>>;
 }
 
 const homeSlice = createSlice<HomeState, HomeReducer, typeof HomeReducerName>({
@@ -34,6 +38,7 @@ const homeSlice = createSlice<HomeState, HomeReducer, typeof HomeReducerName>({
 			password: '',
 		},
 		currentPath: '/',
+		confirmPassword: '',
 	},
 	reducers: {
 		confirmMenuOption: (state, action) => {
@@ -45,8 +50,23 @@ const homeSlice = createSlice<HomeState, HomeReducer, typeof HomeReducerName>({
 		saveCurrentPath: (state, action) => {
 			state.currentPath = action.payload;
 		},
+		saveUserName: (state, action) => {
+			state.userInformation.username = action.payload;
+		},
+		savePassWord: (state, action) => {
+			state.userInformation.password = action.payload;
+		},
+		confirmPassword: (state, action) => {
+			state.confirmPassword = action.payload;
+		},
 	},
 });
-export const { confirmMenuOption, saveUserInformation, saveCurrentPath } =
-	homeSlice.actions;
+export const {
+	confirmMenuOption,
+	saveUserInformation,
+	saveCurrentPath,
+	saveUserName,
+	savePassWord,
+	confirmPassword,
+} = homeSlice.actions;
 export default homeSlice;

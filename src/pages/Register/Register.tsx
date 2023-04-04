@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Form, Input, message, Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { RegisterApi } from '../../Api/RegisterApi';
 import { ValidUsername } from '../../Api/ValidUsername';
 import './Register.scss';
+import { StoreValue } from 'rc-field-form/lib/interface';
+import { NamePath } from 'antd/es/form/interface';
+import { useStoreDispatch, useStoreSelector } from '../../Store/Store';
+import {
+	confirmPassword,
+	savePassWord,
+	saveUserName,
+} from '../../Slice/homeSlice';
 
 const Register = () => {
-	const [username, setUsername] = useState('');
-	const [password, setPassword] = useState('');
-	const [confirmed, setConfirmed] = useState('');
 	const navigate = useNavigate();
+	const dispatch = useStoreDispatch();
+	const username = useStoreSelector(
+		(state) => state.home.userInformation.username
+	);
+	const password = useStoreSelector(
+		(state) => state.home.userInformation.password
+	);
+	const confirmed = useStoreSelector((state) => state.home.confirmPassword);
 
 	async function onFinish(values: { userName: string; password: string }) {
 		const valid = await ValidUsername(values.userName).then();
@@ -30,6 +43,28 @@ const Register = () => {
 			title: '提示',
 			content: '请正确填写注册信息',
 		});
+	}
+
+	const onInputUsername = (e: React.FormEvent<HTMLInputElement>) => {
+		dispatch(saveUserName(e.currentTarget.value));
+	};
+
+	const onInputPassword = (e: React.FormEvent<HTMLInputElement>) => {
+		dispatch(savePassWord(e.currentTarget.value));
+	};
+	const onSaveConfirmed = (e: React.FormEvent<HTMLInputElement>) => {
+		dispatch(confirmPassword(e.currentTarget.value));
+	};
+
+	function verifyPassword(getFieldValue: (name: NamePath) => StoreValue) {
+		return {
+			validator(_: object, value: string) {
+				if (!value || getFieldValue('password') === value) {
+					return Promise.resolve();
+				}
+				return Promise.reject(new Error('两次密码不一致，请重新输入'));
+			},
+		};
 	}
 
 	return (
@@ -63,9 +98,7 @@ const Register = () => {
 						className="register-form-input"
 						placeholder={'请输入您的用户名'}
 						value={username}
-						onChange={(e) => {
-							setUsername(e.target.value);
-						}}
+						onChange={onInputUsername}
 					/>
 				</Form.Item>
 				<p className="register-form-input-title">创建密码</p>
@@ -88,9 +121,7 @@ const Register = () => {
 						className="register-form-input"
 						placeholder={'密码'}
 						value={password}
-						onChange={(e) => {
-							setPassword(e.target.value);
-						}}
+						onChange={onInputPassword}
 					/>
 				</Form.Item>
 				<p className="register-form-input-title">确认密码</p>
@@ -103,23 +134,14 @@ const Register = () => {
 							required: true,
 							message: '请再次输入您的密码',
 						},
-						({ getFieldValue }) => ({
-							validator(_, value) {
-								if (!value || getFieldValue('password') === value) {
-									return Promise.resolve();
-								}
-								return Promise.reject(new Error('两次密码不一致，请重新输入'));
-							},
-						}),
+						({ getFieldValue }) => verifyPassword(getFieldValue),
 					]}
 				>
 					<Input.Password
 						className="register-form-input"
 						placeholder={'请再次输入您的密码'}
 						value={confirmed}
-						onChange={(e) => {
-							setConfirmed(e.target.value);
-						}}
+						onChange={onSaveConfirmed}
 					/>
 				</Form.Item>
 
