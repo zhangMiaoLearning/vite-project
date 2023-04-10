@@ -52,7 +52,7 @@ export const useCardAction = (props: BoardCardProps) => {
 		description: string;
 		rate: number;
 	}) {
-		const x = await updateCard({
+		await updateCard({
 			id: props.id,
 			title: values.title,
 			description: values.description,
@@ -60,7 +60,7 @@ export const useCardAction = (props: BoardCardProps) => {
 			updateAt: date,
 			userName: currentUserName,
 		});
-		console.log(x);
+
 		if (date) {
 			dispatch(
 				confirmUpdate({
