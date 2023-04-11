@@ -6,7 +6,7 @@ import { Card } from './cardApiSlice';
 
 export const CardReducerName = 'card';
 
-interface CardState {
+export interface CardState {
 	creatingCard?: Card;
 	updatingCard?: Card;
 	deleting: {
@@ -34,21 +34,22 @@ interface CardReducer extends SliceCaseReducers<CardState> {
 	confirmDelete: CaseReducer<CardState, PayloadAction<string>>;
 }
 
+export const initialCardState: CardState = {
+	cardList: [],
+	query: {
+		keyword: undefined,
+	},
+	editing: {
+		id: '',
+	},
+	deleting: {
+		id: '',
+	},
+	isDeleteModalOpen: false,
+};
 const cardSlice = createSlice<CardState, CardReducer, typeof CardReducerName>({
 	name: CardReducerName,
-	initialState: {
-		cardList: [],
-		query: {
-			keyword: undefined,
-		},
-		editing: {
-			id: '',
-		},
-		deleting: {
-			id: '',
-		},
-		isDeleteModalOpen: false,
-	},
+	initialState: initialCardState,
 	reducers: {
 		initCardList: (state, action) => {
 			state.cardList = Array.isArray(action.payload) ? action.payload : [];
