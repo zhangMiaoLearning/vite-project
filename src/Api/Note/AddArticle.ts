@@ -6,13 +6,17 @@ export const AddArticle = (
 		title: string;
 		content: HTMLInputElement;
 	},
-	userName: string | null
+	description: string,
+	userName: string | null,
+	updateAt: null | string
 ) => {
 	request
 		.post('/article', {
 			title: values.title,
 			content: values.content,
+			description: description,
 			userName: userName,
+			updateAt: updateAt,
 		})
 		.then((res) => {
 			console.log(res.data);

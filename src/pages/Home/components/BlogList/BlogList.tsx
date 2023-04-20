@@ -1,59 +1,55 @@
-import { Avatar, List, Space } from 'antd';
-import React from 'react';
+import { Avatar, List } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { GetArticles } from '../../../../Api/Note/GetArticles';
+import { Note } from '../../../../Slice/noteSlice';
+import Mock from 'mockjs';
 
-const data = Array.from({ length: 23 }).map((_, i) => ({
-	href: 'https://ant.design',
-	title: `ant design part ${i}`,
-	avatar: `https://joesch.moe/api/v1/random?key=${i}`,
-	description:
-		'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-	content:
-		'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-}));
+const BlogList: React.FC = () => {
+	const [data, setData] = useState<Note[]>([]);
+	const [page, setPage] = useState(1);
+	const mockColor = Mock.mock({
+		color: '@color',
+	}) as { color: string };
 
-const IconText = ({ icon, text }: { icon: React.FC; text: string }) => (
-	<Space>
-		{React.createElement(icon)}
-		{text}
-	</Space>
-);
-
-const BlogList: React.FC = () => (
-	<List
-		itemLayout="vertical"
-		size="large"
-		pagination={{
-			onChange: (page) => {
-				console.log(page);
-			},
-			pageSize: 3,
-		}}
-		dataSource={data}
-		footer={
-			<div>
-				<b>ant design</b> footer part
-			</div>
-		}
-		renderItem={(item) => (
-			<List.Item
-				key={item.title}
-				extra={
-					<img
-						width={272}
-						alt="logo"
-						src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+	useEffect(() => {
+		getData().then();
+	}, []);
+	const getData = async () => {
+		const data = await GetArticles(page);
+		setData(data);
+		console.log(data);
+	};
+	return (
+		<List
+			itemLayout="vertical"
+			size="large"
+			pagination={{
+				onChange: (page) => {
+					setPage(page);
+				},
+				pageSize: 5,
+			}}
+			dataSource={data}
+			footer={
+				<div>
+					<b>ant design</b> footer part
+				</div>
+			}
+			renderItem={({ description, id, title, userName }) => (
+				<List.Item key={id}>
+					<List.Item.Meta
+						avatar={
+							<Avatar style={{ backgroundColor: mockColor.color }}>
+								{userName}
+							</Avatar>
+						}
+						title={title}
 					/>
-				}
-			>
-				<List.Item.Meta
-					avatar={<Avatar src={item.avatar} />}
-					title={<a href={item.href}>{item.title}</a>}
-					description={item.description}
-				/>
-				{item.content}
-			</List.Item>
-		)}
-	/>
-);
+					{description}
+				</List.Item>
+			)}
+		/>
+	);
+};
 
 export default BlogList;
