@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { GetArticles } from '../../../../Api/Note/GetArticles';
 import { Note } from '../../../../Slice/noteSlice';
 import Mock from 'mockjs';
+import { orderBy } from 'lodash';
 
 const BlogList: React.FC = () => {
 	const [data, setData] = useState<Note[]>([]);
-	const [page, setPage] = useState(1);
 	const mockColor = Mock.mock({
 		color: '@color',
 	}) as { color: string };
@@ -15,18 +15,15 @@ const BlogList: React.FC = () => {
 		getData().then();
 	}, []);
 	const getData = async () => {
-		const data = await GetArticles(page);
-		setData(data);
-		console.log(data);
+		const data = await GetArticles();
+		const oderData = orderBy(data, ['updateAt'], ['desc']);
+		setData(oderData);
 	};
 	return (
 		<List
 			itemLayout="vertical"
 			size="large"
 			pagination={{
-				onChange: (page) => {
-					setPage(page);
-				},
 				pageSize: 5,
 			}}
 			dataSource={data}
