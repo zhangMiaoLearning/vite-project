@@ -1,0 +1,41 @@
+.article-detail {
+  display: flex;
+  .article-detail-main {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    margin-top: 4px;
+    .article-detail-main-content {
+      height: 70vh;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      .article-detail-main-content-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 10%;
+        font-weight: bold;
+        font-size: 24px;
+      }
+      .article-detail-main-content-body {
+        margin: 1% 2.5% 1% 2.5%;
+        height: 85%;
+      }
+      .article-detail-main-content-editor {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .divider {
+        margin: 1% 2.5% 1% 2.5%;
+        width: 95%;
+        min-width: 95%;
+      }
+    }
+  }
+  .article-detail-aside {
+    width: 20vw;
+  }
+}

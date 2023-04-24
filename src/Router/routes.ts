@@ -23,5 +23,10 @@ const ROUTES = [
 		path: '/home',
 		element: lazy(() => import('../pages/Home/Home')),
 	},
+	{
+		key: 'note',
+		path: '/note',
+		element: lazy(() => import('../pages/NoteDetail/NoteDetail')),
+	},
 ];
 export default ROUTES;
