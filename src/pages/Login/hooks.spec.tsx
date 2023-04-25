@@ -1,9 +1,9 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 import { useNavigate } from 'react-router-dom';
 import { useStoreDispatch, useStoreSelector } from '../../Store/Store';
-import { useLoginQuery } from '../loginApiSlice';
-import { saveUserInformation } from '../homeSlice';
-import { useLogin } from '../../pages/Login/hooks';
+import { useLoginQuery } from '../../Slice/loginApiSlice';
+import { saveUserInformation } from '../../Slice/homeSlice';
+import { useLogin } from './hooks';
 import { Modal } from 'antd';
 
 jest.mock('react-router-dom', () => ({
