@@ -1,30 +1,9 @@
 import { Avatar, List } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { GetArticles } from '../../../../Api/Note/GetArticles';
-import { Note } from '../../../../Slice/noteSlice';
-import Mock from 'mockjs';
-import { orderBy } from 'lodash';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useBlogList } from './hooks';
 
 const BlogList: React.FC = () => {
-	const [data, setData] = useState<Note[]>([]);
-	const navigate = useNavigate();
-	const mockColor = Mock.mock({
-		color: '@color',
-	}) as { color: string };
-
-	useEffect(() => {
-		getData().then();
-	}, []);
-	const getData = async () => {
-		const data = await GetArticles();
-		const oderData = orderBy(data, ['updateAt'], ['desc']);
-		setData(oderData);
-	};
-
-	function onNoteDetail(id: string) {
-		navigate(`/note?id=${id}`);
-	}
+	const { noteList, mockColor, onNoteDetail } = useBlogList();
 
 	return (
 		<List
@@ -33,7 +12,7 @@ const BlogList: React.FC = () => {
 			pagination={{
 				pageSize: 5,
 			}}
-			dataSource={data}
+			dataSource={noteList}
 			renderItem={({ description, id, title, userName }) => (
 				<List.Item key={id} onClick={() => onNoteDetail(id)}>
 					<List.Item.Meta
