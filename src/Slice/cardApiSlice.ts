@@ -76,8 +76,12 @@ export const cardApiSlice = createApi({
 			}),
 			providesTags: ['card'],
 			async onQueryStarted(arg, api) {
-				const { data } = await api.queryFulfilled;
-				api.dispatch(initCardList(data));
+				try {
+					const { data } = await api.queryFulfilled;
+					api.dispatch(initCardList(data));
+				} catch (error) {
+					console.log(error);
+				}
 			},
 		}),
 	}),
