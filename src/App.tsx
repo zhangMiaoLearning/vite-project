@@ -2,14 +2,14 @@ import React from 'react';
 import './App.module.scss';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Suspense } from 'react';
-import LazyModule from './pages/Components/LazyModule';
-import ROUTES from './Router/routes';
-import Header from './pages/Components/Header/Header';
-import GlobalProvider from './Utils/Store/GlobalProvider';
+import LazyModule from './pages/components/LazyModule';
+import ROUTES from './router/routes';
+import Header from './pages/components/header/Header';
+import GlobalProvider from './utils/Store/GlobalProvider';
 import { Provider } from 'react-redux';
-import { store } from './Store/Store';
-import Mouse from './pages/Components/MouseTracker/Mouse';
-import Heart from './pages/Components/MouseTracker/Heart';
+import { store } from './store/Store';
+import Mouse from './pages/components/mouseTracker/Mouse';
+import Heart from './pages/components/mouseTracker/Heart';
 
 function App() {
 	return (
