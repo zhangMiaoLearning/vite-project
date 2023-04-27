@@ -5,15 +5,15 @@ import './BlogList.scss';
 
 const BlogList: React.FC = () => {
 	const { noteList, mockColor, onNoteDetail } = useBlogList();
-
 	return (
 		<div>
 			<div className="blog-list-title">文章列表</div>
 			<List
+				className="blog-list"
 				itemLayout="vertical"
 				size="large"
 				pagination={{
-					pageSize: 5,
+					pageSize: 6,
 				}}
 				dataSource={noteList}
 				renderItem={({ description, id, title, userName }) => (

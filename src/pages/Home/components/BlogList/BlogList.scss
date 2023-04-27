@@ -4,3 +4,15 @@
   color: #242424;
   font-size: 16px;
 }
+.blog-list {
+  background:white;
+  border-radius: 5px;
+  height:90vh;
+}
+.ant-list-item-action {
+  display: flex;
+  justify-content: flex-end;
+}
+.blog-delete-hide {
+  visibility: hidden;
+}

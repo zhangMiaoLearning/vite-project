@@ -9,13 +9,11 @@ const BoardSideRight: React.FC<{ onQuery: (key: string) => void }> = () => {
 	const showSearch = useBoardSideRight();
 	return (
 		<div>
-			{showSearch ? (
-				<Search
-					placeholder="请输入搜索内容"
-					onSearch={onQuery}
-					className="search-box"
-				/>
-			) : null}
+			<Search
+				placeholder="请输入搜索内容"
+				onSearch={onQuery}
+				className={showSearch ? 'search-box' : 'search-box-hide'}
+			/>
 		</div>
 	);
 };

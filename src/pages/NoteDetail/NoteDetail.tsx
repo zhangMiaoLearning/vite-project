@@ -1,32 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './NoteDetail.scss';
-import { useSearchParams } from 'react-router-dom';
-import { GetArticleById } from '../../Api/Note/GetArticleById';
 import ReactQuill from 'react-quill';
 import { Divider } from 'antd';
+import { Star } from './component/Star';
+import { useNoteDetail } from './useNoteDetial';
 
-interface NoteDetail {
-	title: string;
-	content: string;
-	description: string;
-	userName: string;
-	updateAt: string;
-	id: number;
-}
 const NoteDetail = () => {
-	const [params] = useSearchParams('');
-	const id = params.getAll('id')[0];
-	const [content, setContent] = useState({} as NoteDetail);
-	useEffect(() => {
-		initArticleData(id).then();
-	}, [id]);
-	async function initArticleData(id: string) {
-		const data = await GetArticleById(id).then();
-		setContent(data[0]);
-	}
+	const content = useNoteDetail();
 	return (
 		<div className="article-detail">
-			<div className="article-detail-aside"></div>
+			<div className="article-detail-aside">
+				<Star container={'stars-left'} className={'star'} />
+			</div>
 			<div className="article-detail-main">
 				<div className="article-detail-main-content">
 					<div className="article-detail-main-content-title">
@@ -46,7 +31,9 @@ const NoteDetail = () => {
 					/>
 				</div>
 			</div>
-			<div className="article-detail-aside"></div>
+			<div className="article-detail-aside">
+				<Star container={'stars-right'} className={'star-right'} />
+			</div>
 		</div>
 	);
 };

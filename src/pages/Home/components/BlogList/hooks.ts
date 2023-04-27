@@ -13,6 +13,7 @@ export const useBlogList = () => {
 	}) as { color: string };
 	const dispatch = useStoreDispatch();
 	const noteList = useStoreSelector((state) => state.note.noteList);
+	const currentName = sessionStorage.getItem('userName');
 	useEffect(() => {
 		getData().then();
 	}, []);
@@ -25,6 +26,8 @@ export const useBlogList = () => {
 	function onNoteDetail(id: string) {
 		navigate(`/note?id=${id}`);
 	}
-
-	return { noteList, mockColor, onNoteDetail };
+	const isEdit = (userName: string | null) => {
+		return currentName === userName;
+	};
+	return { noteList, mockColor, onNoteDetail, isEdit, currentName };
 };
