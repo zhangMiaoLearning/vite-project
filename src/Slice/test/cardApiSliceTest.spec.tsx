@@ -2,11 +2,9 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import { renderHook } from '@testing-library/react-hooks';
 import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { useSearchCardQuery } from '../cardApiSlice';
 import React from 'react';
-
-const mockStore = configureStore([]);
+import { store } from '../../Store/Store';
 
 const server = setupServer(
 	rest.get('http://localhost:3004/card', (req, res, ctx) => {
@@ -45,7 +43,6 @@ afterAll(() => server.close());
 describe('cardApiSlice', () => {
 	describe('useSearchCardQuery', () => {
 		it('should return the correct data', async () => {
-			const store = mockStore({});
 			const wrapper: React.FC<{ children: React.ReactNode }> = ({
 				children,
 			}) => <Provider store={store}>{children}</Provider>;
@@ -77,7 +74,6 @@ describe('cardApiSlice', () => {
 		});
 
 		it('should return an error for an invalid search term', async () => {
-			const store = mockStore({});
 			const wrapper: React.FC<{ children: React.ReactNode }> = ({
 				children,
 			}) => <Provider store={store}>{children}</Provider>;
