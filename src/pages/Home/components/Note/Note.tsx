@@ -39,6 +39,19 @@ const Note = () => {
 							theme="snow"
 							placeholder="请输入文章内容"
 							onChange={handleContentChange}
+							modules={{
+								toolbar: {
+									container: [
+										['bold', 'italic', 'underline', 'strike'],
+										[{ color: [] }, { background: [] }],
+										['link', 'image'],
+										['blockquote', 'code-block'],
+										[{ list: 'ordered' }, { list: 'bullet' }],
+										[{ align: [] }, { indent: '-1' }, { indent: '+1' }],
+										['clean'],
+									],
+								},
+							}}
 						/>
 					</Form.Item>
 					<Form.Item>

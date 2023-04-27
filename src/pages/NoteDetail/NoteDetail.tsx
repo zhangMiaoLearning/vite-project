@@ -3,7 +3,7 @@ import './NoteDetail.scss';
 import { useSearchParams } from 'react-router-dom';
 import { GetArticleById } from '../../Api/Note/GetArticleById';
 import ReactQuill from 'react-quill';
-import { Divider, Input } from 'antd';
+import { Divider } from 'antd';
 
 interface NoteDetail {
 	title: string;
@@ -26,7 +26,7 @@ const NoteDetail = () => {
 	}
 	return (
 		<div className="article-detail">
-			<div className="article-detail-aside">side</div>
+			<div className="article-detail-aside"></div>
 			<div className="article-detail-main">
 				<div className="article-detail-main-content">
 					<div className="article-detail-main-content-title">
@@ -45,11 +45,8 @@ const NoteDetail = () => {
 						modules={{ toolbar: false }}
 					/>
 				</div>
-				<div>
-					<Input />
-				</div>
 			</div>
-			<div className="article-detail-aside">right</div>
+			<div className="article-detail-aside"></div>
 		</div>
 	);
 };
